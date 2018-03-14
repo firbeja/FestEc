@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    >
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_location_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/app_background" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/ic_location_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{fa-delete}"/>
+
+</android.support.v7.widget.LinearLayoutCompat>
