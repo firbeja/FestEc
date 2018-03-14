@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.train.location;
+package com.flj.latte.ec.main.create.train.location;
 
 import com.alibaba.fastjson.JSONArray;
 import com.flj.latte.ui.recycler.DataConverter;

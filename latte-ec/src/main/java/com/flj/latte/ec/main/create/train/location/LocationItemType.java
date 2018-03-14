@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.train.location;
+package com.flj.latte.ec.main.create.train.location;
 
 /**
  * Created by LB-john on 2018/3/13.

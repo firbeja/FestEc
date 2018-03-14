@@ -1,8 +1,6 @@
-package com.flj.latte.ec.main.train.location;
+package com.flj.latte.ec.main.create.train.location;
 
 import android.support.v7.widget.AppCompatTextView;
-import android.view.View;
-import android.widget.TextView;
 
 import com.diabin.latte.ec.R;
 import com.flj.latte.ui.recycler.MultipleFields;

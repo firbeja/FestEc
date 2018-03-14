@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="7dp"
-    app:cardElevation="3dp"
+    app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -20,21 +20,12 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="6"
-                android:paddingLeft="20dp"
-                android:text="训练"
-                android:textColor="@color/we_chat_black"
-                android:textSize="13sp" />
-
-            <TextView
                 android:id="@+id/tv_schedule_date_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="7"
+                android:layout_marginLeft="20dp"
                 android:text="日期和时间"
                 android:textColor="@color/we_chat_black"
                 android:textSize="17sp" />
@@ -50,11 +41,14 @@
                 android:textSize="17sp" />
 
             <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/ic_schedule_delete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="3"
-                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:gravity="left"
+                android:paddingLeft="5dp"
                 android:text="{fa-minus-square-o}" />
 
 

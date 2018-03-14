@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.train;
+package com.flj.latte.ec.main.create.friendly;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.create.train.location.LocationDelegate;
 import com.flj.latte.ec.main.schedule.Schedule;
 import com.flj.latte.ec.main.schedule.ScheduleType;
-import com.flj.latte.ec.main.train.location.LocationDelegate;
 import com.flj.latte.ui.date.DateDialogUtil;
 import com.flj.latte.util.log.LatteLogger;
 

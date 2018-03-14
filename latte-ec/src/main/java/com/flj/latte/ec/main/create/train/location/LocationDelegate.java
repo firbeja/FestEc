@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.train.location;
+package com.flj.latte.ec.main.create.train.location;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,18 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.StringUtils;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.ec.main.index.search.SearchDataConverter;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.util.log.LatteLogger;
 import com.flj.latte.util.storage.LattePreference;
-import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,10 +96,10 @@ public class LocationDelegate extends LatteDelegate {
 
     private void initRecycleView(){
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setReverseLayout(true);
         mRecycleView.setLayoutManager(manager);
 
         mData = new LocationDataConverter().convert();
+        Collections.reverse(mData);
         mAdapter = new LocationAdapter(mData);
         mRecycleView.setAdapter(mAdapter);
         mRecycleView.scrollToPosition(mAdapter.getItemCount()-1);

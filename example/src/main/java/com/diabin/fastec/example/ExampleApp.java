@@ -55,6 +55,7 @@ public class ExampleApp extends MultiDexApplication {
                 //添加Cookie同步拦截器
                 .withWebHost("https://www.baidu.com/")
 //                .withInterceptor(new AddCookieInterceptor())
+                .withActivity(new ExampleActivity())
                 .configure();
         initStetho();
 

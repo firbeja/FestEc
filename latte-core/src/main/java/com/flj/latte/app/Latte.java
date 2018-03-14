@@ -28,6 +28,10 @@ public final class Latte {
         return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
     }
 
+    public static Context getActivityContext() {
+        return getConfiguration(ConfigKeys.ACTIVITY);
+    }
+
     public static Handler getHandler() {
         return getConfiguration(ConfigKeys.HANDLER);
     }

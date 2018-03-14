@@ -1,18 +1,11 @@
-package com.flj.latte.ec.main.train.location;
+package com.flj.latte.ec.main.create.train.location;
 
-import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
-import com.diabin.latte.ec.R;
 import com.flj.latte.ui.recycler.MultipleFields;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
-
-import java.util.List;
-
-import retrofit2.http.DELETE;
 
 /**
  * Created by LB-john on 2018/3/13.
