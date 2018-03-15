@@ -10,6 +10,7 @@ import com.flj.latte.app.Latte;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.launcher.LauncherDelegate;
 import com.flj.latte.ec.main.EcBottomDelegate;
+import com.flj.latte.ec.main.create.CreatEventsDelegate;
 import com.flj.latte.ec.main.create.train.TrainDelegate;
 import com.flj.latte.ec.main.schedule.ScheduleDelegate;
 import com.flj.latte.ec.sign.ISignListener;
@@ -58,7 +59,7 @@ public class ExampleActivity extends ProxyActivity implements
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new ScheduleDelegate();
+        return new LauncherDelegate();
     }
 
     @Override
