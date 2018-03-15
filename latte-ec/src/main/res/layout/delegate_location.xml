@@ -45,7 +45,6 @@
             android:text="保存"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.RecyclerView
