@@ -39,7 +39,7 @@ public class ScheduleDelegate extends BottomItemDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
         BmobQuery<Schedule> query = new BmobQuery<>();
-        query.setLimit(100).setSkip(1).order("-dateAndTime");
+        query.setLimit(100).setSkip(0).order("-dateAndTime");
         query.findObjects(new FindListener<Schedule>() {
             @Override
             public void done(List<Schedule> list, BmobException e) {

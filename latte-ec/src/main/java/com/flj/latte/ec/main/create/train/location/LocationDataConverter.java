@@ -50,6 +50,7 @@ public class LocationDataConverter extends DataConverter {
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
                         .setItemType(LocationItemType.ITEM_LOCATION)
                         .setField(MultipleFields.TEXT, historyItemText)
+                        .setField(HistoryType.TYPE,mTagHistory)
                         .build();
                 ENTITIES.add(entity);
             }

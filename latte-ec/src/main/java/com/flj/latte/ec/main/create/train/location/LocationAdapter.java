@@ -1,12 +1,16 @@
 package com.flj.latte.ec.main.create.train.location;
 
 import android.support.v7.widget.AppCompatTextView;
+import android.text.Spannable;
+import android.text.SpannableString;
 
 import com.diabin.latte.ec.R;
+import com.flj.latte.ec.main.create.HistoryType;
 import com.flj.latte.ui.recycler.MultipleFields;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.ui.recycler.MultipleRecyclerAdapter;
 import com.flj.latte.ui.recycler.MultipleViewHolder;
+import com.flj.latte.util.storage.LattePreference;
 
 import java.util.List;
 

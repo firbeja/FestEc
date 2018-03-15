@@ -2,6 +2,7 @@ package com.flj.latte.ec.main.schedule;
 
 import com.flj.latte.ui.recycler.DataConverter;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
+import com.flj.latte.util.log.LatteLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import cn.bmob.v3.datatype.BmobDate;
 public class ScheduleDataConverter extends DataConverter {
 
 
+
+
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         List<Schedule> schedules = getListData();
@@ -23,16 +26,30 @@ public class ScheduleDataConverter extends DataConverter {
             Schedule schedule = schedules.get(i);
             String type = schedule.getType();
             String category = schedule.getCategory();
-//            String opponent = schedule.getOpponent();
-//            String competition = schedule.getCompetition();
-//            String theme = schedule.getTheme();
+
+            String opponent = null;
+            if (type.equals(ScheduleType.FRIENDLY_MATCH)){
+                opponent = schedule.getOpponent();
+            }
+
+            String competition = null;
+            if (type.equals(ScheduleType.FORMAL_MATCH)){
+                opponent = schedule.getOpponent();
+                competition = schedule.getCompetition();
+            }
+
+            String theme = null;
+            if (type.equals(ScheduleType.ACTIVITY)){
+                theme = schedule.getTheme();
+            }
+
             String headlines = schedule.getHeadlines();
             BmobDate dateAndTime = schedule.getDateAndTime();
             String duration = schedule.getDuration();
             String location = schedule.getLocation();
             String summary = schedule.getSummary();
 
-            int itemType = 0;
+            int itemType = -1;
             switch (type) {
                 case ScheduleType.FRIENDLY_MATCH:
                     itemType = ScheduleItemType.ITEM_SCHEDULE_FRIENDLY_MATCH;
@@ -53,9 +70,9 @@ public class ScheduleDataConverter extends DataConverter {
             final MultipleItemEntity entity = MultipleItemEntity.builder()
                     .setItemType(itemType)
                     .setField(ScheduleItemFields.category, category)
-//                    .setField(ScheduleItemFields.opponent, opponent)
-//                    .setField(ScheduleItemFields.competition, competition)
-//                    .setField(ScheduleItemFields.theme, theme)
+                    .setField(ScheduleItemFields.opponent, opponent)
+                    .setField(ScheduleItemFields.competition, competition)
+                    .setField(ScheduleItemFields.theme, theme)
                     .setField(ScheduleItemFields.headlines, headlines)
                     .setField(ScheduleItemFields.dateAndTime, dateAndTime)
                     .setField(ScheduleItemFields.duration, duration)

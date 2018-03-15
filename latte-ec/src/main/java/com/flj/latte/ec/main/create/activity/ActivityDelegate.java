@@ -1,4 +1,4 @@
-package com.flj.latte.ec.main.create.friendly;
+package com.flj.latte.ec.main.create.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -33,15 +33,14 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by LB-john on 2018/3/15.
  */
 
-public class FriendlyDelegate extends BottomItemDelegate {
-    private String[] mCategory = new String[]{"羽毛球 单打", "羽毛球 双打", "其他"};
+public class ActivityDelegate extends BottomItemDelegate {
+    private String[] mCategory = new String[]{"聚餐", "K歌", "打牌","足疗按摩","周边游","其他活动"};
     private String[] mDuration = new String[]{"0.5小时", "1.0小时", "1.5小时", "2.0小时", "2.5小时", "3.0小时", "3.5小时", "4.0小时", "4.5小时", "5.0小时"};
 
     @BindView(R2.id.tv_train_category)
     TextView tvTrainCategory = null;
-
-    @BindView(R2.id.tv_train_opponent)
-    TextView tvTrainOpponent = null;
+    @BindView(R2.id.tv_train_theme)
+    TextView tvTrainTheme = null;
     @BindView(R2.id.tv_train_date)
     TextView tvTrainDate = null;
     @BindView(R2.id.tv_train_time)
@@ -68,13 +67,13 @@ public class FriendlyDelegate extends BottomItemDelegate {
 
 
 
-    @OnClick(R2.id.rl_train_opponent)
+    @OnClick(R2.id.rl_train_theme)
     void onClickOpponent() {
-        LocationDelegate delegate = LocationDelegate.create(HistoryType.OPPONENT);
+        LocationDelegate delegate = LocationDelegate.create(HistoryType.THEME);
         delegate.setLocationListener(new LocationDelegate.ILocationListener() {
             @Override
             public void locationChange(String location) {
-                tvTrainOpponent.setText(location);
+                tvTrainTheme.setText(location);
             }
         });
         getParentDelegate().getSupportDelegate().start(delegate);
@@ -146,7 +145,7 @@ public class FriendlyDelegate extends BottomItemDelegate {
         String location = tvTrainLocation.getText().toString();
         String summary = etTrainSummary.getText().toString();
 
-        String opponent = tvTrainOpponent.getText().toString();
+        String theme = tvTrainTheme.getText().toString();
 
         Schedule schedule = new Schedule();
         try {
@@ -157,13 +156,13 @@ public class FriendlyDelegate extends BottomItemDelegate {
             e.printStackTrace();
         }
 
-        schedule.setType(ScheduleType.FRIENDLY_MATCH);
+        schedule.setType(ScheduleType.ACTIVITY);
         schedule.setCategory(category);
         schedule.setDuration(duration);
         schedule.setLocation(location);
         schedule.setSummary(summary);
 
-        schedule.setOpponent(opponent);
+        schedule.setTheme(theme);
 
         schedule.save(new SaveListener<String>() {
             @Override
@@ -179,7 +178,7 @@ public class FriendlyDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_friendly;
+        return R.layout.delegate_activity;
     }
 
     @Override

@@ -24,7 +24,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="7"
+                android:layout_weight="5"
                 android:layout_marginLeft="20dp"
                 android:text="日期和时间"
                 android:textColor="@color/we_chat_black"
@@ -65,54 +65,77 @@
                 android:layout_weight="20"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5">
+                    android:layout_weight="5"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/iv_schedule_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:src="@mipmap/ic_launcher" />
+
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/iv_schedule_image"
-                        android:orientation="vertical">
+                        android:id="@+id/ll_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        >
 
+                        <ImageView
+                            android:id="@+id/iv_home"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/ic_xingong" />
 
                         <TextView
-                            android:id="@+id/tv_schedule_headlines"
+                            android:id="@+id/tv_home_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="挥拍训练"
+                            android:text="信工球队"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@color/we_chat_black"
                             android:textSize="17sp" />
 
-                        <TextView
-                            android:id="@+id/tv_schedule_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="普通训练"
-                            android:textColor="@color/we_chat_black"
-                            android:textSize="17sp" />
+
                     </LinearLayout>
 
-                </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_away"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/iv_away"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/ic_guangyao" />
+
+                        <TextView
+                            android:id="@+id/tv_away_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="广药球队"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="17sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_schedule_location"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:text="广药体育馆"
                     android:gravity="center"
                     android:paddingBottom="5dp"/>
@@ -124,22 +147,44 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/app_background" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="13">
+                android:layout_weight="13"
+                >
 
                 <TextView
+                    android:layout_marginTop="5dp"
+                    android:padding="7dp"
+                    android:id="@+id/tv_schedule_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="友谊赛"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="7dp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:padding="13dp"
                     android:id="@+id/tv_schedule_enter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:text="立即报名"
-                    android:paddingBottom="20dp"
+                    android:layout_centerInParent="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
-            </LinearLayout>
+
+                <TextView
+                    android:padding="7dp"
+                    android:id="@+id/tv_schedule_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="羽毛球单打"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="7dp"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

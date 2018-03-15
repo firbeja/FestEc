@@ -13,6 +13,8 @@ import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.create.activity.ActivityDelegate;
+import com.flj.latte.ec.main.create.formal.FormalDelegate;
 import com.flj.latte.ec.main.create.friendly.FriendlyDelegate;
 import com.flj.latte.ec.main.create.train.TrainDelegate;
 
@@ -77,9 +79,9 @@ public class CreateEventsDelegate extends BottomItemDelegate {
 
         mDelegate = new ArrayList<>();
         mDelegate.add(new FriendlyDelegate());
+        mDelegate.add(new FormalDelegate());
         mDelegate.add(new TrainDelegate());
-        mDelegate.add(new TrainDelegate());
-        mDelegate.add(new TrainDelegate());
+        mDelegate.add(new ActivityDelegate());
 
     }
 

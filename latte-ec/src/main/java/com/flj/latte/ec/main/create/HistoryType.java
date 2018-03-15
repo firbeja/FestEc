@@ -6,6 +6,8 @@ package com.flj.latte.ec.main.create;
 
 public class HistoryType {
 
+    public static final int TYPE = 84;
+
     public static final int OPPONENT = 80;
 
     public static final int LOCATION = 81;

@@ -72,12 +72,12 @@
 
                     <ImageView
                         android:id="@+id/iv_schedule_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@drawable/ic_food" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -88,10 +88,10 @@
 
 
                         <TextView
-                            android:id="@+id/tv_schedule_headlines"
+                            android:id="@+id/tv_schedule_theme"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="挥拍训练"
+                            android:text="广药二饭小炒"
                             android:textColor="@color/we_chat_black"
                             android:textSize="17sp" />
 
@@ -100,9 +100,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="普通训练"
-                            android:textColor="@color/we_chat_black"
-                            android:textSize="17sp" />
+                            android:text="聚餐"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </RelativeLayout>

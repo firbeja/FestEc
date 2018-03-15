@@ -32,6 +32,9 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
     protected ScheduleAdapter(List<MultipleItemEntity> data) {
         super(data);
         addItemType(ScheduleItemType.ITEM_SCHEDULE_TRAIN, R.layout.item_schedule_train);
+        addItemType(ScheduleItemType.ITEM_SCHEDULE_FRIENDLY_MATCH,R.layout.item_schedule_friendly);
+        addItemType(ScheduleItemType.ITEM_SCHEDULE_FORMAL_MATCH,R.layout.item_schedule_friendly);
+        addItemType(ScheduleItemType.ITEM_SCHEDULE_ACTIVITY,R.layout.item_schedule_activity);
     }
 
     @Override
@@ -39,60 +42,80 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
         super.convert(holder, entity);
         switch (holder.getItemViewType()){
             case ScheduleItemType.ITEM_SCHEDULE_TRAIN:
-                BmobDate dateAndTime = entity.getField(ScheduleItemFields.dateAndTime);
-                String date = dateAndTime.getDate();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                try {
-                    Date format1 = format.parse(date);
-                    LatteLogger.d("DateFormat","format1 ===========  "+format1);
-                    SimpleDateFormat format2 = new SimpleDateFormat("MM月dd日  HH:mm");
-                    format3 = format2.format(format1);
-                    LatteLogger.d("DateFormat","format3 -----------===========  "+ format3);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-                String duration = entity.getField(ScheduleItemFields.duration);
+                init(holder,entity);
                 String headlines = entity.getField(ScheduleItemFields.headlines);
-                String category = entity.getField(ScheduleItemFields.category);
-                String location = entity.getField(ScheduleItemFields.location);
-
-                TextView tvDateAndTime = holder.getView(R.id.tv_schedule_date_time);
-                TextView tvDuration = holder.getView(R.id.tv_schedule_duration);
                 TextView tvHeadlines = holder.getView(R.id.tv_schedule_headlines);
-                TextView tvCategory = holder.getView(R.id.tv_schedule_category);
-                TextView tvLocation = holder.getView(R.id.tv_schedule_location);
-                TextView icScheduleDelete = holder.getView(R.id.ic_schedule_delete);
-                icScheduleDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        DeleteDialog.show();
-                        CallbackManager
-                                .getInstance()
-                                .addCallback(CallbackType.DELETE_ITEM, new IGlobalCallback() {
-                                    @Override
-                                    public void executeCallback(@Nullable Object args) {
-                                        remove(holder.getLayoutPosition());
-                                    }
-                                });
-                    }
-                });
-
-                tvDateAndTime.setText(format3);
-                tvDuration.setText(duration);
                 tvHeadlines.setText(headlines);
-                tvCategory.setText(category);
-                tvLocation.setText(location);
-
+                break;
+            case ScheduleItemType.ITEM_SCHEDULE_FORMAL_MATCH:
+                init(holder,entity);
+                String opponent = entity.getField(ScheduleItemFields.opponent);
+                String competition = entity.getField(ScheduleItemFields.competition);
+                TextView tvAwayName = holder.getView(R.id.tv_away_name);
+                TextView tvScheduleType = holder.getView(R.id.tv_schedule_type);
+                tvAwayName.setText(opponent);
+                tvScheduleType.setText(competition);
+                break;
+            case ScheduleItemType.ITEM_SCHEDULE_FRIENDLY_MATCH:
+                init(holder,entity);
+                String opponent1 = entity.getField(ScheduleItemFields.opponent);
+                TextView tvAwayName1 = holder.getView(R.id.tv_away_name);
+                tvAwayName1.setText(opponent1);
+                break;
+            case ScheduleItemType.ITEM_SCHEDULE_ACTIVITY:
+                init(holder,entity);
+                String theme = entity.getField(ScheduleItemFields.theme);
+                TextView tvScheduleTheme = holder.getView(R.id.tv_schedule_theme);
+                tvScheduleTheme.setText(theme);
                 break;
             default:
                 break;
         }
     }
 
+    private void init(final MultipleViewHolder holder, MultipleItemEntity entity){
+        BmobDate dateAndTime = entity.getField(ScheduleItemFields.dateAndTime);
+        String date = dateAndTime.getDate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        try {
+            Date format1 = format.parse(date);
+            SimpleDateFormat format2 = new SimpleDateFormat("MM月dd日  HH:mm");
+            format3 = format2.format(format1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String duration = entity.getField(ScheduleItemFields.duration);
+        String category = entity.getField(ScheduleItemFields.category);
+        String location = entity.getField(ScheduleItemFields.location);
+
+        TextView tvDateAndTime = holder.getView(R.id.tv_schedule_date_time);
+        TextView tvDuration = holder.getView(R.id.tv_schedule_duration);
+        TextView tvCategory = holder.getView(R.id.tv_schedule_category);
+        TextView tvLocation = holder.getView(R.id.tv_schedule_location);
+
+        tvDateAndTime.setText(format3);
+        tvDuration.setText(duration);
+        tvCategory.setText(category);
+        tvLocation.setText(location);
+
+        TextView icScheduleDelete = holder.getView(R.id.ic_schedule_delete);
+        icScheduleDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DeleteDialog.show();
+                CallbackManager
+                        .getInstance()
+                        .addCallback(CallbackType.DELETE_ITEM, new IGlobalCallback() {
+                            @Override
+                            public void executeCallback(@Nullable Object args) {
+                                remove(holder.getLayoutPosition());
+                            }
+                        });
+            }
+        });
+    }
 
 }

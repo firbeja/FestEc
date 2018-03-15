@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.EditText;
 
@@ -31,6 +32,7 @@ import butterknife.OnClick;
  */
 
 public class LocationDelegate extends LatteDelegate {
+
 
     private LocationAdapter mAdapter;
     private List<MultipleItemEntity> mData;
@@ -134,6 +136,21 @@ public class LocationDelegate extends LatteDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initRecycleView();
         mRecycleView.addOnItemTouchListener(new LocationClickListener(this));
+
+        SpannableString string;
+        if (mTagHistory == HistoryType.OPPONENT){
+            string = new SpannableString("输入对手");
+            mLocationEdit.setHint(string);
+        }else if(mTagHistory == HistoryType.LOCATION){
+            string = new SpannableString("输入地址");
+            mLocationEdit.setHint(string);
+        }else if (mTagHistory == HistoryType.COMPETITION){
+            string = new SpannableString("输入比赛");
+            mLocationEdit.setHint(string);
+        }else if (mTagHistory == HistoryType.THEME){
+            string = new SpannableString("输入主题");
+            mLocationEdit.setHint(string);
+        }
     }
 
     private void initRecycleView(){
