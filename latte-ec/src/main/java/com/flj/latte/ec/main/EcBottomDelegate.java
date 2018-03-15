@@ -7,7 +7,7 @@ import com.flj.latte.delegates.bottom.BottomItemDelegate;
 import com.flj.latte.delegates.bottom.BottomTabBean;
 import com.flj.latte.delegates.bottom.ItemBuilder;
 import com.flj.latte.ec.main.cart.ShopCartDelegate;
-import com.flj.latte.ec.main.create.CreatEventsDelegate;
+import com.flj.latte.ec.main.create.CreateEventsDelegate;
 import com.flj.latte.ec.main.discover.DiscoverDelegate;
 import com.flj.latte.ec.main.index.IndexDelegate;
 import com.flj.latte.ec.main.personal.PersonalDelegate;
@@ -33,7 +33,7 @@ public class EcBottomDelegate extends BaseBottomDelegate {
 //        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
 
         items.put(new BottomTabBean("{icon-scan}", "主页"), new ScheduleDelegate());
-        items.put(new BottomTabBean("{fa-sort}", "分类"), new CreatEventsDelegate());
+        items.put(new BottomTabBean("{fa-sort}", "分类"), new CreateEventsDelegate());
         items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
         items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
         items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());

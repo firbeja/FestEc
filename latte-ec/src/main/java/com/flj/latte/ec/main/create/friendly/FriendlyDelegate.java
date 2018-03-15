@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.create.HistoryType;
 import com.flj.latte.ec.main.create.train.location.LocationDelegate;
 import com.flj.latte.ec.main.schedule.Schedule;
 import com.flj.latte.ec.main.schedule.ScheduleType;
@@ -29,18 +30,17 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
- * Created by LB-john on 2018/3/12.
+ * Created by LB-john on 2018/3/15.
  */
 
-public class TrainDelegate extends BottomItemDelegate {
-
+public class FriendlyDelegate extends BottomItemDelegate {
     private String[] mCategory = new String[]{"分组对抗", "普通训练"};
     private String[] mDuration = new String[]{"0.5小时", "1.0小时", "1.5小时", "2.0小时", "2.5小时", "3.0小时", "3.5小时", "4.0小时", "4.5小时", "5.0小时"};
 
     @BindView(R2.id.tv_train_category)
     TextView tvTrainCategory = null;
-    @BindView(R2.id.et_train_headlines)
-    EditText etTrainHeadlines = null;
+    @BindView(R2.id.tv_train_opponent)
+    TextView tvTrainOpponent = null;
     @BindView(R2.id.tv_train_date)
     TextView tvTrainDate = null;
     @BindView(R2.id.tv_train_time)
@@ -63,6 +63,18 @@ public class TrainDelegate extends BottomItemDelegate {
                 dialog.dismiss();
             }
         });
+    }
+
+    @OnClick(R2.id.rl_train_opponent)
+    void onClickOpponent(){
+        LocationDelegate delegate = LocationDelegate.create(HistoryType.OPPONENT);
+        delegate.setLocationListener(new LocationDelegate.ILocationListener() {
+            @Override
+            public void locationChange(String location) {
+                tvTrainOpponent.setText(location);
+            }
+        });
+        getParentDelegate().getSupportDelegate().start(delegate);
     }
 
     @OnClick(R2.id.rl_train_date)
@@ -103,23 +115,27 @@ public class TrainDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.rl_train_location)
     void onClickLocation() {
-        LocationDelegate delegate = new LocationDelegate();
+        LocationDelegate delegate = LocationDelegate.create(HistoryType.LOCATION);
         delegate.setLocationListener(new LocationDelegate.ILocationListener() {
             @Override
             public void locationChange(String location) {
                 tvTrainLocation.setText(location);
             }
         });
-        getSupportDelegate().start(delegate);
+        getParentDelegate().getSupportDelegate().start(delegate);
     }
 
     @OnClick(R2.id.btn_train_create)
-    void onClickTrainCreat(){
+    void onClickTrainCreate(){
 
+        TrainCreate();
+
+    }
+
+    public void TrainCreate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         String category = tvTrainCategory.getText().toString();
-        String headlines = etTrainHeadlines.getText().toString();
         String date = tvTrainDate.getText().toString();
         String time = tvTrainTime.getText().toString();
         String dateAndTime = date + " " + time;
@@ -138,7 +154,6 @@ public class TrainDelegate extends BottomItemDelegate {
 
         schedule.setType(ScheduleType.TRAIN);
         schedule.setCategory(category);
-        schedule.setHeadlines(headlines);
         schedule.setDuration(duration);
         schedule.setLocation(location);
         schedule.setSummary(summary);
@@ -152,12 +167,11 @@ public class TrainDelegate extends BottomItemDelegate {
                 }
             }
         });
-
     }
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_train;
+        return R.layout.delegate_friendly;
     }
 
     @Override
@@ -170,5 +184,4 @@ public class TrainDelegate extends BottomItemDelegate {
         builder.setSingleChoiceItems(strings, 0, listener);
         builder.show();
     }
-
 }

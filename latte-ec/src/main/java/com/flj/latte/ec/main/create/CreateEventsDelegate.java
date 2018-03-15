@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.create.friendly.FriendlyDelegate;
 import com.flj.latte.ec.main.create.train.TrainDelegate;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import butterknife.BindView;
  * Created by LB-john on 2018/3/14.
  */
 
-public class CreatEventsDelegate extends BottomItemDelegate {
+public class CreateEventsDelegate extends BottomItemDelegate {
 
     private List<String> mTitle = null;
 
@@ -76,7 +76,7 @@ public class CreatEventsDelegate extends BottomItemDelegate {
         mTitle.add("活动");
 
         mDelegate = new ArrayList<>();
-        mDelegate.add(new TrainDelegate());
+        mDelegate.add(new FriendlyDelegate());
         mDelegate.add(new TrainDelegate());
         mDelegate.add(new TrainDelegate());
         mDelegate.add(new TrainDelegate());

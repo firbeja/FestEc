@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.create.HistoryType;
+import com.flj.latte.ec.main.create.train.location.LocationItemType;
 import com.flj.latte.ec.main.schedule.Schedule;
 import com.flj.latte.ec.main.schedule.ScheduleType;
 import com.flj.latte.ec.main.create.train.location.LocationDelegate;
@@ -103,19 +105,24 @@ public class TrainDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.rl_train_location)
     void onClickLocation() {
-        LocationDelegate delegate = new LocationDelegate();
+        LocationDelegate delegate = LocationDelegate.create(HistoryType.LOCATION);
         delegate.setLocationListener(new LocationDelegate.ILocationListener() {
             @Override
             public void locationChange(String location) {
                 tvTrainLocation.setText(location);
             }
         });
-        getSupportDelegate().start(delegate);
+        getParentDelegate().getSupportDelegate().start(delegate);
     }
 
     @OnClick(R2.id.btn_train_create)
-    void onClickTrainCreat(){
+    void onClickTrainCreate(){
 
+        TrainCreate();
+
+    }
+
+    public void TrainCreate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         String category = tvTrainCategory.getText().toString();
@@ -152,7 +159,6 @@ public class TrainDelegate extends BottomItemDelegate {
                 }
             }
         });
-
     }
 
     @Override

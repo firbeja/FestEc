@@ -1,8 +1,14 @@
 package com.diabin.fastec.example;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.flj.latte.activities.ProxyActivity;
@@ -10,7 +16,6 @@ import com.flj.latte.app.Latte;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.launcher.LauncherDelegate;
 import com.flj.latte.ec.main.EcBottomDelegate;
-import com.flj.latte.ec.main.create.CreatEventsDelegate;
 import com.flj.latte.ec.main.create.train.TrainDelegate;
 import com.flj.latte.ec.main.schedule.ScheduleDelegate;
 import com.flj.latte.ec.sign.ISignListener;
@@ -33,6 +38,7 @@ public class ExampleActivity extends ProxyActivity implements
         if (actionBar != null) {
             actionBar.hide();
         }
+
         Latte.getConfigurator().withActivity(this);
         StatusBarCompat.translucentStatusBar(this, true);
 
@@ -89,4 +95,8 @@ public class ExampleActivity extends ProxyActivity implements
                 break;
         }
     }
+
+
+
+
 }
