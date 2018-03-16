@@ -9,7 +9,9 @@ import android.view.View;
 
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
+import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
+import com.flj.latte.ec.main.EcBottomDelegate;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.util.log.LatteLogger;
 
@@ -47,8 +49,10 @@ public class ScheduleDelegate extends BottomItemDelegate {
                     mData = new ScheduleDataConverter().setListData(list).convert();
                     LinearLayoutManager manager = new LinearLayoutManager(getContext());
                     mRecycleView.setLayoutManager(manager);
-                    ScheduleAdapter adapter = new ScheduleAdapter(mData);
+                    LatteDelegate parentDelegate = getParentDelegate();
+                    ScheduleAdapter adapter = new ScheduleAdapter(mData,parentDelegate);
                     mRecycleView.setAdapter(adapter);
+                    LatteLogger.d("ScheduleDelegate","ScheduleDelegate-----find=========");
                 } else {
                     LatteLogger.d("BmobQuery", "ScheduleDelegate-----find----null " + e.toString());
                 }

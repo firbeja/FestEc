@@ -11,6 +11,16 @@ import cn.bmob.v3.BmobUser;
 public class AccountManager {
 
 
+    public static MyUser getMyUser(){
+        MyUser myUser = BmobUser.getCurrentUser(MyUser.class);
+        return myUser;
+    }
+
+    public static String getMyUserId(){
+        MyUser myUser = BmobUser.getCurrentUser(MyUser.class);
+        return myUser.getObjectId();
+    }
+
     /**
     dd
      */

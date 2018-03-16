@@ -24,6 +24,8 @@ public class ScheduleDataConverter extends DataConverter {
         int size = schedules.size();
         for (int i = 0; i < size; i++) {
             Schedule schedule = schedules.get(i);
+
+            String objectId = schedule.getObjectId();
             String type = schedule.getType();
             String category = schedule.getCategory();
 
@@ -69,6 +71,7 @@ public class ScheduleDataConverter extends DataConverter {
 
             final MultipleItemEntity entity = MultipleItemEntity.builder()
                     .setItemType(itemType)
+                    .setField(ScheduleItemFields.objectId,objectId)
                     .setField(ScheduleItemFields.category, category)
                     .setField(ScheduleItemFields.opponent, opponent)
                     .setField(ScheduleItemFields.competition, competition)

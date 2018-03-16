@@ -2,9 +2,15 @@ package com.flj.latte.ec.main.schedule;
 
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diabin.latte.ec.R;
+import com.flj.latte.delegates.LatteDelegate;
+import com.flj.latte.ec.main.EcBottomDelegate;
+import com.flj.latte.ec.main.schedule.detail.ScheduleDetailDelegate;
+import com.flj.latte.ec.main.sort.SortDelegate;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.ui.recycler.MultipleRecyclerAdapter;
 import com.flj.latte.ui.recycler.MultipleViewHolder;
@@ -20,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by LB-john on 2018/3/14.
@@ -29,8 +37,11 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
 
     private String format3;
 
-    protected ScheduleAdapter(List<MultipleItemEntity> data) {
+    private final LatteDelegate DELEGATE;
+
+    protected ScheduleAdapter(List<MultipleItemEntity> data,LatteDelegate delegate) {
         super(data);
+        this.DELEGATE = delegate;
         addItemType(ScheduleItemType.ITEM_SCHEDULE_TRAIN, R.layout.item_schedule_train);
         addItemType(ScheduleItemType.ITEM_SCHEDULE_FRIENDLY_MATCH,R.layout.item_schedule_friendly);
         addItemType(ScheduleItemType.ITEM_SCHEDULE_FORMAL_MATCH,R.layout.item_schedule_friendly);
@@ -100,6 +111,19 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
         tvCategory.setText(category);
         tvLocation.setText(location);
 
+
+
+        final String objectId = entity.getField(ScheduleItemFields.objectId);
+
+        LinearLayout eventDetail = holder.getView(R.id.ll_schedule_item);
+        eventDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleDetailDelegate delegate = ScheduleDetailDelegate.create(objectId);
+                DELEGATE.getSupportDelegate().start(delegate);
+            }
+        });
+
         TextView icScheduleDelete = holder.getView(R.id.ic_schedule_delete);
         icScheduleDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +136,23 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
                             @Override
                             public void executeCallback(@Nullable Object args) {
                                 remove(holder.getLayoutPosition());
+//                                Schedule schedule = new Schedule();
+//                                schedule.setObjectId(objectId);
+//                                schedule.delete(new UpdateListener() {
+//                                    @Override
+//                                    public void done(BmobException e) {
+//                                        if (e==null){
+//                                            Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+//                                        }else {
+//                                            Toast.makeText(mContext, "删除失败", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//                                });
                             }
                         });
             }
         });
+
     }
 
 }

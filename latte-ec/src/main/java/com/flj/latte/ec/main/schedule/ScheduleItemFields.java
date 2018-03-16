@@ -17,6 +17,7 @@ public enum  ScheduleItemFields {
     dateAndTime,
     duration,
     location,
-    summary
+    summary,
+    objectId
 
 }

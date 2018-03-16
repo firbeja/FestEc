@@ -3,6 +3,8 @@ package com.flj.latte.app;
 import android.content.Context;
 import android.os.Handler;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by 傅令杰 on 2017/3/29
  */
@@ -35,6 +37,8 @@ public final class Latte {
     public static Handler getHandler() {
         return getConfiguration(ConfigKeys.HANDLER);
     }
+
+
 
     public static void test(){
     }

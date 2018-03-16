@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:background="@color/we_chat_black"
+        android:paddingTop="19dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="比赛详情"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/we_chat_black">
+
+            <TextView
+                android:id="@+id/tv_schedule_detail_pending"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@color/dimgray"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="待定"
+                android:textColor="@color/snow" />
+
+            <TextView
+                android:id="@+id/tv_schedule_detail_leave"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/tv_schedule_detail_pending"
+                android:background="@color/dimgray"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="请假"
+                android:textColor="@color/snow" />
+
+            <TextView
+                android:id="@+id/tv_schedule_detail_enter"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/tv_schedule_detail_leave"
+                android:background="@color/dimgray"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="报名"
+                android:textColor="@color/snow" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
