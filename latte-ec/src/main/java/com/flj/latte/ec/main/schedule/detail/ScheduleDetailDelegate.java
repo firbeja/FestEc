@@ -33,7 +33,7 @@ import cn.bmob.v3.listener.UpdateListener;
  * Created by LB-john on 2018/3/16.
  */
 
-public class ScheduleDetailDelegate extends LatteDelegate {
+public class ScheduleDetailDelegate extends LatteDelegate implements IDetailState {
 
     @BindView(R2.id.tv_schedule_detail_enter)
     TextView tvEnter = null;
@@ -86,7 +86,6 @@ public class ScheduleDetailDelegate extends LatteDelegate {
         if (!mState.equals(ENTER)) {
             //更新 EventUserState 表 的状态，更新为 报名 enter
             updateState(ENTER);
-            initState();
         }
     }
 
@@ -100,7 +99,6 @@ public class ScheduleDetailDelegate extends LatteDelegate {
 
         if (!mState.equals(LEAVE)) {
             updateState(LEAVE);
-            initState();
         }
     }
 
@@ -109,12 +107,10 @@ public class ScheduleDetailDelegate extends LatteDelegate {
 
         if (!isFirst) {
             saveState(ENTER);
-            initState();
         }
 
         if (!mState.equals(PENDING)) {
             updateState(PENDING);
-            initState();
         }
     }
 
@@ -124,12 +120,17 @@ public class ScheduleDetailDelegate extends LatteDelegate {
     private static final String ARG_SCHEDULE_OBJECT_ID = "ARG_SCHEDULE_OBJECT_ID";
     private static final String ERRORMESSAGE = "errorCode:9015,errorMsg:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0";
 
+    private  IDetailState DETAILSTATE;
     //事件的objectId
     private String mObjectId = "";
     private String myUserId = AccountManager.getMyUserId();
     private static String mState;
     private static String eventsUserStateObjectId;
     private static boolean isFirst;
+
+    public void setListener(IDetailState iDetailState){
+        this.DETAILSTATE = iDetailState;
+    }
 
     public static ScheduleDetailDelegate create(String objectId) {
         final Bundle args = new Bundle();
@@ -164,6 +165,7 @@ public class ScheduleDetailDelegate extends LatteDelegate {
                 + "  ;  \nisFirst: " + isFirst);
 
         initState();
+        setListener(this);
 
         LatteLogger.d("Detail", "onBindView  ()  --- 运行了 initState() 之后"
                 + "  ;  \nmObjectId: " + mObjectId
@@ -174,14 +176,16 @@ public class ScheduleDetailDelegate extends LatteDelegate {
     }
 
     //更新状态 报名 请假 待定
-    private void updateState(String userState) {
+    private void updateState(final String userState) {
         EventsUserState eventsUserState = new EventsUserState();
         eventsUserState.setState(userState);
         eventsUserState.update(eventsUserStateObjectId, new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
+                    mState=userState;
                     Toast.makeText(_mActivity, "操作成功", Toast.LENGTH_SHORT).show();
+                    initState();
                 } else {
                     LatteLogger.d("aaaaaa", "e ======= " + e.toString());
                     Toast.makeText(_mActivity, "操作失败", Toast.LENGTH_SHORT).show();
@@ -206,7 +210,7 @@ public class ScheduleDetailDelegate extends LatteDelegate {
                     isFirst = true;
                     eventsUserStateObjectId = s;
                     Toast.makeText(_mActivity, "报名成功", Toast.LENGTH_SHORT).show();
-
+                    initState();
                     LatteLogger.d("Detail", "onClickEnter() --- 1 --- state.save"
                             + "  ;  \nmObjectId: " + mObjectId
                             + "  ;  \nmyUserId: " + myUserId
@@ -229,39 +233,21 @@ public class ScheduleDetailDelegate extends LatteDelegate {
         bmobQuery.findObjects(new FindListener<EventsUserState>() {
             @Override
             public void done(List<EventsUserState> list, BmobException e) {
-                if (e == null) {
+                if (e==null){
                     if (list.size() > 1) {
                         LatteLogger.d("ScheduleDetailDelegate", "EventsUserState 里相同事件 相同用户 多余 一条记录");
                     }
+
                     EventsUserState eventsUserState = list.get(0);
                     eventsUserStateObjectId = eventsUserState.getObjectId();
                     final String state = eventsUserState.getState();
-                    if (state.equals(ENTER)) {
-                        tvEnter.setBackgroundResource(R.color.indianred);
-                        tvLeave.setBackgroundResource(R.color.dimgray);
-                        tvPending.setBackgroundResource(R.color.dimgray);
+                    mState=state;
+                    LatteLogger.d("onStateChange" , "initState(); state: " + state
+                    +"\nDETAILSTATE:"+DETAILSTATE);
+                    if (DETAILSTATE!=null){
+                        DETAILSTATE.onStateChange(state);
                     }
-                    if (state.equals(LEAVE)) {
-                        tvEnter.setBackgroundResource(R.color.dimgray);
-                        tvLeave.setBackgroundResource(R.color.indianred);
-                        tvPending.setBackgroundResource(R.color.dimgray);
-                    }
-                    if (state.equals(PENDING)) {
-                        tvEnter.setBackgroundResource(R.color.dimgray);
-                        tvLeave.setBackgroundResource(R.color.dimgray);
-                        tvPending.setBackgroundResource(R.color.indianred);
-                    }
-                    mState = state;
-
-                    LatteLogger.d("Detail", "onClickEnter() --- 1 --- 在saveState(ENTER) 之后 ， initState()之前 --- initState()里"
-                            + "  ;  \nmObjectId: " + mObjectId
-                            + "  ;  \nmyUserId: " + myUserId
-                            + "  ;  \nmState: " + mState
-                            + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                            + "  ;  \nisFirst: " + isFirst
-                            + "  ;  \nstate: " + state);
-
-                } else {
+                }else {
                     Toast.makeText(_mActivity, "未报名", Toast.LENGTH_SHORT).show();
 //                    if (ERRORMESSAGE.equals(e.toString())){
 //                        saveState(PENDING);
@@ -269,7 +255,43 @@ public class ScheduleDetailDelegate extends LatteDelegate {
 //                        Toast.makeText(_mActivity, "未报名,插入待定状态"+e.toString(), Toast.LENGTH_SHORT).show();
 //                    }
                 }
+
+
+
             }
         });
     }
+
+    @Override
+    public void onStateChange(String state) {
+
+        LatteLogger.d("onStateChange" , "state: " + state
+        +"\nmState: " + mState);
+
+            if (mState.equals(ENTER)) {
+                tvEnter.setBackgroundResource(R.color.indianred);
+                tvLeave.setBackgroundResource(R.color.dimgray);
+                tvPending.setBackgroundResource(R.color.dimgray);
+            }
+            if (mState.equals(LEAVE)) {
+                tvEnter.setBackgroundResource(R.color.dimgray);
+                tvLeave.setBackgroundResource(R.color.indianred);
+                tvPending.setBackgroundResource(R.color.dimgray);
+            }
+            if (mState.equals(PENDING)) {
+                tvEnter.setBackgroundResource(R.color.dimgray);
+                tvLeave.setBackgroundResource(R.color.dimgray);
+                tvPending.setBackgroundResource(R.color.indianred);
+            }
+
+//            LatteLogger.d("Detail", "onClickEnter() --- 1 --- 在saveState(ENTER) 之后 ， initState()之前 --- initState()里"
+//                    + "  ;  \nmObjectId: " + mObjectId
+//                    + "  ;  \nmyUserId: " + myUserId
+//                    + "  ;  \nmState: " + mState
+//                    + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
+//                    + "  ;  \nisFirst: " + isFirst
+//                    + "  ;  \nstate: " + state);
+
+        }
+
 }
