@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,8 +17,10 @@ import com.flj.latte.app.AccountManager;
 import com.flj.latte.app.MyUser;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.main.schedule.Schedule;
+import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.util.log.LatteLogger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,6 +39,8 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class ScheduleDetailDelegate extends LatteDelegate implements IDetailState {
 
+    @BindView(R2.id.rv_schedule_detail_recycle_view)
+    RecyclerView mRecycleView = null;
     @BindView(R2.id.tv_schedule_detail_enter)
     TextView tvEnter = null;
     @BindView(R2.id.tv_schedule_detail_leave)
@@ -81,7 +87,6 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         }
 
 
-
         if (!mState.equals(ENTER)) {
             //更新 EventUserState 表 的状态，更新为 报名 enter
             updateState(ENTER);
@@ -118,15 +123,24 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     private static final String ARG_SCHEDULE_OBJECT_ID = "ARG_SCHEDULE_OBJECT_ID";
     private static final String ERRORMESSAGE = "errorCode:9015,errorMsg:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0";
 
-    private  IDetailState DETAILSTATE;
+    private IDetailState DETAILSTATE;
     //事件的objectId
     private String mObjectId = "";
     private String myUserId = AccountManager.getMyUserId();
     private static String mState;
     private static String eventsUserStateObjectId;
     private static boolean isFirst;
+    //回应人数
+    private static int answerPeopleCount = 0;
+    private int enterCount = 0;
+    private int leaveCount = 0;
+    private int pendingCount = 0;
 
-    public void setListener(IDetailState iDetailState){
+    private List<EventsUserState> enterList = null;
+    private List<EventsUserState> leaveList = null;
+    private List<EventsUserState> pendingList = null;
+
+    public void setListener(IDetailState iDetailState) {
         this.DETAILSTATE = iDetailState;
     }
 
@@ -171,6 +185,79 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                 + "  ;  \nmState: " + mState
                 + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
                 + "  ;  \nisFirst: " + isFirst);
+
+        //更新页面数据
+        initDetail();
+
+        //展示 报名 请假 待定 RecycleView
+        initThreeRecycleView();
+
+    }
+
+
+    private void initThreeRecycleView() {
+        BmobQuery<EventsUserState> query = new BmobQuery<>();
+        query.addWhereEqualTo("scheduleId", mObjectId);
+        query.findObjects(new FindListener<EventsUserState>() {
+            @Override
+            public void done(List<EventsUserState> list, BmobException e) {
+
+                if (e == null) {
+                    enterList = new ArrayList<EventsUserState>();
+                    leaveList = new ArrayList<EventsUserState>();
+                    pendingList = new ArrayList<EventsUserState>();
+
+                    int size = list.size();
+                    answerPeopleCount = size;
+                    for (int i = 0; i < size; i++) {
+                        EventsUserState eventsUserState = list.get(i);
+                        String state = eventsUserState.getState();
+                        if (state.equals(ENTER)) {
+                            enterList.add(eventsUserState);
+                            enterCount++;
+                        } else if (state.equals(LEAVE)) {
+                            leaveList.add(eventsUserState);
+                            leaveCount++;
+                        } else if (state.equals(PENDING)) {
+                            pendingList.add(eventsUserState);
+                            pendingCount++;
+                        }
+                    }
+
+                initEnterRecycle(enterList);
+                initLeaveRecycle(leaveList);
+                initPendingRecycle(pendingList);
+                }
+            }
+        });
+    }
+
+    private void initEnterRecycle(List<EventsUserState> list) {
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
+        mRecycleView.setAdapter(adapter);
+    }
+
+    private void initLeaveRecycle(List<EventsUserState> list) {
+
+    }
+
+    private void initPendingRecycle(List<EventsUserState> list) {
+
+    }
+
+    private void initDetail() {
+
+        BmobQuery<Schedule> query = new BmobQuery<>();
+        query.getObject(mObjectId, new QueryListener<Schedule>() {
+            @Override
+            public void done(Schedule schedule, BmobException e) {
+
+            }
+        });
+
     }
 
     //更新状态 报名 请假 待定
@@ -181,7 +268,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    mState=userState;
+                    mState = userState;
                     Toast.makeText(_mActivity, "更新成功", Toast.LENGTH_SHORT).show();
                     initState();
                 } else {
@@ -207,7 +294,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                 if (e == null) {
                     isFirst = true;
                     eventsUserStateObjectId = s;
-                    Toast.makeText(_mActivity, "保存"+stateUser+"成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "保存" + stateUser + "成功", Toast.LENGTH_SHORT).show();
                     initState();
                     LatteLogger.d("Detail", "onClickEnter() --- 1 --- state.save"
                             + "  ;  \nmObjectId: " + mObjectId
@@ -217,7 +304,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                             + "  ;  \nisFirst: " + isFirst);
 
                 } else {
-                    Toast.makeText(_mActivity, "保存"+stateUser+"失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "保存" + stateUser + "失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -231,7 +318,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         bmobQuery.findObjects(new FindListener<EventsUserState>() {
             @Override
             public void done(List<EventsUserState> list, BmobException e) {
-                if (e==null){
+                if (e == null) {
                     if (list.size() > 1) {
                         LatteLogger.d("ScheduleDetailDelegate", "EventsUserState 里相同事件 相同用户 多余 一条记录");
                     }
@@ -239,14 +326,14 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                     EventsUserState eventsUserState = list.get(0);
                     eventsUserStateObjectId = eventsUserState.getObjectId();
                     final String state = eventsUserState.getState();
-                    mState=state;
-                    LatteLogger.d("onStateChange" , "initState(); state: " + state
-                    +"\nDETAILSTATE:"+DETAILSTATE);
-                    if (DETAILSTATE!=null){
+                    mState = state;
+                    LatteLogger.d("onStateChange", "initState(); state: " + state
+                            + "\nDETAILSTATE:" + DETAILSTATE);
+                    if (DETAILSTATE != null) {
                         DETAILSTATE.onStateChange(state);
                     }
-                }else {
-                    isFirst=false;
+                } else {
+                    isFirst = false;
                     Toast.makeText(_mActivity, "未报名", Toast.LENGTH_SHORT).show();
 //                    if (ERRORMESSAGE.equals(e.toString())){
 //                        saveState(PENDING);
@@ -256,7 +343,6 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                 }
 
 
-
             }
         });
     }
@@ -264,24 +350,24 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     @Override
     public void onStateChange(String state) {
 
-        LatteLogger.d("onStateChange" , "state: " + state
-        +"\nmState: " + mState);
+        LatteLogger.d("onStateChange", "state: " + state
+                + "\nmState: " + mState);
 
-            if (mState.equals(ENTER)) {
-                tvEnter.setBackgroundResource(R.color.indianred);
-                tvLeave.setBackgroundResource(R.color.dimgray);
-                tvPending.setBackgroundResource(R.color.dimgray);
-            }
-            if (mState.equals(LEAVE)) {
-                tvEnter.setBackgroundResource(R.color.dimgray);
-                tvLeave.setBackgroundResource(R.color.indianred);
-                tvPending.setBackgroundResource(R.color.dimgray);
-            }
-            if (mState.equals(PENDING)) {
-                tvEnter.setBackgroundResource(R.color.dimgray);
-                tvLeave.setBackgroundResource(R.color.dimgray);
-                tvPending.setBackgroundResource(R.color.indianred);
-            }
+        if (mState.equals(ENTER)) {
+            tvEnter.setBackgroundResource(R.color.indianred);
+            tvLeave.setBackgroundResource(R.color.dimgray);
+            tvPending.setBackgroundResource(R.color.dimgray);
+        }
+        if (mState.equals(LEAVE)) {
+            tvEnter.setBackgroundResource(R.color.dimgray);
+            tvLeave.setBackgroundResource(R.color.indianred);
+            tvPending.setBackgroundResource(R.color.dimgray);
+        }
+        if (mState.equals(PENDING)) {
+            tvEnter.setBackgroundResource(R.color.dimgray);
+            tvLeave.setBackgroundResource(R.color.dimgray);
+            tvPending.setBackgroundResource(R.color.indianred);
+        }
 
 //            LatteLogger.d("Detail", "onClickEnter() --- 1 --- 在saveState(ENTER) 之后 ， initState()之前 --- initState()里"
 //                    + "  ;  \nmObjectId: " + mObjectId
@@ -291,6 +377,6 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
 //                    + "  ;  \nisFirst: " + isFirst
 //                    + "  ;  \nstate: " + state);
 
-        }
+    }
 
 }
