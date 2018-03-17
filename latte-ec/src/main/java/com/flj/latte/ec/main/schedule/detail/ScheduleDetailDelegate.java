@@ -44,8 +44,6 @@ public class ScheduleDetailDelegate extends LatteDelegate {
 
     private String mState;
     private String eventsUserStateObjectId;
-    //isHaveCode 指 Bmob 后台是否有记录，有返回 true
-    private boolean isHaveCode = true;
 
     @BindView(R2.id.tv_schedule_detail_enter)
     TextView tvEnter = null;

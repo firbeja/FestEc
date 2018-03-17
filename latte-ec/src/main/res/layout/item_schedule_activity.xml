@@ -78,7 +78,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/ic_food" />
+                        android:src="@drawable/ic_dining" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

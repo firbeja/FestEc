@@ -136,18 +136,18 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
                             @Override
                             public void executeCallback(@Nullable Object args) {
                                 remove(holder.getLayoutPosition());
-//                                Schedule schedule = new Schedule();
-//                                schedule.setObjectId(objectId);
-//                                schedule.delete(new UpdateListener() {
-//                                    @Override
-//                                    public void done(BmobException e) {
-//                                        if (e==null){
-//                                            Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
-//                                        }else {
-//                                            Toast.makeText(mContext, "删除失败", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                                });
+                                Schedule schedule = new Schedule();
+                                schedule.setObjectId(objectId);
+                                schedule.delete(new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        if (e==null){
+                                            Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            Toast.makeText(mContext, "删除失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                         });
             }

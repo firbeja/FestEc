@@ -35,6 +35,509 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="广药杯"
+                    android:textSize="19sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/app_background" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="129dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="66dp"
+                            android:layout_height="66dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_xingong" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="信工球队"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="VS"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="26dp" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="66dp"
+                            android:layout_height="66dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_guangyao" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="广药球队"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="19dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <!--时间-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="时间"
+                android:textSize="20sp"
+                android:layout_marginRight="55dp"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1990-1-1 17:00"
+                android:textColor="@color/we_chat_black"
+                android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <!--类型-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="类型"
+                android:textSize="20sp"
+                android:layout_marginRight="55dp"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="羽毛球 双打"
+                android:textColor="@color/we_chat_black"
+                android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <!--地址-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="地址"
+                android:textSize="20sp"
+                android:layout_marginRight="55dp"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="广州体育馆"
+                android:textColor="@color/we_chat_black"
+                android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <!--简介-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="简介"
+                android:textSize="20sp"
+                android:layout_marginRight="55dp"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="正式赛"
+                android:textColor="@color/we_chat_black"
+                android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="19dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                android:id="@+id/detail_unanswered_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="未回应 "
+                android:textSize="20sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered_prefix"
+                android:gravity="center"
+                android:text="278"
+                android:textColor="@color/indianred"
+                android:textSize="20sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered_postfix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered"
+                android:gravity="center"
+                android:text=" 人"
+                android:textSize="20sp" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/btn_border"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="短信通知"
+                android:textColor="@color/indianred"
+                android:textSize="16sp" />
+                </RelativeLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/app_background" />
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="33dp"
+                android:paddingRight="20dp"
+                >
+
+                <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                android:id="@+id/detail_unanswered_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="报名 "
+                android:textSize="16sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered_prefix"
+                android:gravity="center"
+                android:text="176"
+                android:textColor="@color/indianred"
+                android:textSize="20sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered_postfix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered"
+                android:gravity="center"
+                android:text=" 人"
+                android:textSize="16sp" />
+                </RelativeLayout>
+
+                <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/app_background"
+                android:layout_marginRight="11dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+
+                <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp">
+                <TextView
+                android:id="@+id/detail_unanswered_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="请假 "
+                android:textSize="16sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered_prefix"
+                android:gravity="center"
+                android:text="176"
+                android:textColor="@color/indianred"
+                android:textSize="20sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered_postfix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered"
+                android:gravity="center"
+                android:text=" 人"
+                android:textSize="16sp" />
+                </RelativeLayout>
+                <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/app_background"
+                android:layout_marginRight="11dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+                <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                android:id="@+id/detail_unanswered_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="待定 "
+                android:textSize="16sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered_prefix"
+                android:gravity="center"
+                android:text="176"
+                android:textColor="@color/indianred"
+                android:textSize="20sp" />
+
+                <TextView
+                android:id="@+id/detail_unanswered_postfix"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/detail_unanswered"
+                android:gravity="center"
+                android:text=" 人"
+                android:textSize="16sp" />
+                </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/app_background"
+                    android:gravity="bottom|center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:text="- 邀请好友报名参与 -"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_marginBottom="67dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_message" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="短信通知"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:textSize="40sp"
+                            android:src="@drawable/ic_friend"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="微信好友"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_circle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="朋友圈"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_qq" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="QQ"
+                            android:textColor="@color/we_chat_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </ScrollView>
 
         <RelativeLayout
