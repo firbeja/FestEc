@@ -92,7 +92,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     void onCLickLeave() {
 
         if (!isFirst) {
-            saveState(ENTER);
+            saveState(LEAVE);
         }
 
         if (!mState.equals(LEAVE)) {
@@ -104,7 +104,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     void onClickPending() {
 
         if (!isFirst) {
-            saveState(ENTER);
+            saveState(PENDING);
         }
 
         if (!mState.equals(PENDING)) {
@@ -182,18 +182,18 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
             public void done(BmobException e) {
                 if (e == null) {
                     mState=userState;
-                    Toast.makeText(_mActivity, "操作成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "更新成功", Toast.LENGTH_SHORT).show();
                     initState();
                 } else {
                     LatteLogger.d("aaaaaa", "e ======= " + e.toString());
-                    Toast.makeText(_mActivity, "操作失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "更新失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     //初始化 EventUserState 表，插入一条记录 事件-用户-待定
-    private void saveState(String stateUser) {
+    private void saveState(final String stateUser) {
         mState = stateUser;
         EventsUserState state = new EventsUserState();
         state.setScheduleId(mObjectId);
@@ -207,7 +207,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                 if (e == null) {
                     isFirst = true;
                     eventsUserStateObjectId = s;
-                    Toast.makeText(_mActivity, "报名成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "保存"+stateUser+"成功", Toast.LENGTH_SHORT).show();
                     initState();
                     LatteLogger.d("Detail", "onClickEnter() --- 1 --- state.save"
                             + "  ;  \nmObjectId: " + mObjectId
@@ -217,7 +217,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                             + "  ;  \nisFirst: " + isFirst);
 
                 } else {
-                    Toast.makeText(_mActivity, "报名失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_mActivity, "保存"+stateUser+"失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -246,6 +246,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                         DETAILSTATE.onStateChange(state);
                     }
                 }else {
+                    isFirst=false;
                     Toast.makeText(_mActivity, "未报名", Toast.LENGTH_SHORT).show();
 //                    if (ERRORMESSAGE.equals(e.toString())){
 //                        saveState(PENDING);
