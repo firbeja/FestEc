@@ -17,16 +17,22 @@ import com.flj.latte.app.AccountManager;
 import com.flj.latte.app.MyUser;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.main.schedule.Schedule;
+import com.flj.latte.ec.main.schedule.ScheduleItemFields;
+import com.flj.latte.ec.main.schedule.ScheduleType;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
 import com.flj.latte.util.log.LatteLogger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
@@ -39,14 +45,36 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class ScheduleDetailDelegate extends LatteDelegate implements IDetailState {
 
-    @BindView(R2.id.rv_schedule_detail_recycle_view)
-    RecyclerView mRecycleView = null;
+    @BindView(R2.id.rv_schedule_detail_enter_recycle_view)
+    RecyclerView mEnterRecycleView = null;
+    @BindView(R2.id.rv_schedule_detail_leave_recycle_view)
+    RecyclerView mLeaveRecycleView = null;
+    @BindView(R2.id.rv_schedule_detail_pending_recycle_view)
+    RecyclerView mPendingRecycleView = null;
     @BindView(R2.id.tv_schedule_detail_enter)
     TextView tvEnter = null;
     @BindView(R2.id.tv_schedule_detail_leave)
     TextView tvLeave = null;
     @BindView(R2.id.tv_schedule_detail_pending)
     TextView tvPending = null;
+    @BindView(R2.id.tv_schedule_detail_opponent)
+    TextView tvOppoent = null;
+    @BindView(R2.id.tv_schedule_detail_dateAndTime)
+    TextView tvDateAndTime = null;
+    @BindView(R2.id.tv_schedule_detail_category)
+    TextView tvCategory = null;
+    @BindView(R2.id.tv_schedule_detail_location)
+    TextView tvLocation = null;
+    @BindView(R2.id.tv_schedule_detail_summary)
+    TextView tvSummary = null;
+    @BindView(R2.id.detail_answered)
+    TextView tvAnswerCount = null;
+    @BindView(R2.id.detail_enter)
+    TextView tvEnterCount = null;
+    @BindView(R2.id.detail_leave)
+    TextView tvLeaveCount = null;
+    @BindView(R2.id.detail_pending)
+    TextView tvPendingCount = null;
 
     @OnClick(R2.id.tv_schedule_detail_enter)
     void onClickEnter() {
@@ -192,6 +220,11 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         //展示 报名 请假 待定 RecycleView
         initThreeRecycleView();
 
+        tvAnswerCount.setText(answerPeopleCount+"");
+        tvEnterCount.setText(enterCount+"");
+        tvLeaveCount.setText(leaveCount+"");
+        tvPendingCount.setText(pendingCount+"");
+
     }
 
 
@@ -224,9 +257,15 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                         }
                     }
 
-                initEnterRecycle(enterList);
-                initLeaveRecycle(leaveList);
-                initPendingRecycle(pendingList);
+                    tvAnswerCount.setText(answerPeopleCount+"");
+                    tvEnterCount.setText(enterCount+"");
+                    tvLeaveCount.setText(leaveCount+"");
+                    tvPendingCount.setText(pendingCount+"");
+
+                    initEnterRecycle(enterList);
+                    initLeaveRecycle(leaveList);
+                    initPendingRecycle(pendingList);
+
                 }
             }
         });
@@ -234,18 +273,27 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
 
     private void initEnterRecycle(List<EventsUserState> list) {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        mRecycleView.setLayoutManager(manager);
+        mEnterRecycleView.setLayoutManager(manager);
         ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
         ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
-        mRecycleView.setAdapter(adapter);
+        mEnterRecycleView.setAdapter(adapter);
     }
 
     private void initLeaveRecycle(List<EventsUserState> list) {
-
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mLeaveRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
+        mLeaveRecycleView.setAdapter(adapter);
     }
 
     private void initPendingRecycle(List<EventsUserState> list) {
-
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setAutoMeasureEnabled(true);
+        mPendingRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
+        mPendingRecycleView.setAdapter(adapter);
     }
 
     private void initDetail() {
@@ -254,7 +302,53 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         query.getObject(mObjectId, new QueryListener<Schedule>() {
             @Override
             public void done(Schedule schedule, BmobException e) {
+                if (e == null) {
+                    String objectId = schedule.getObjectId();
+                    String type = schedule.getType();
+                    String category = schedule.getCategory();
 
+                    String opponent = null;
+                    if (type.equals(ScheduleType.FRIENDLY_MATCH)) {
+                        opponent = schedule.getOpponent();
+                    }
+
+                    String competition = null;
+                    if (type.equals(ScheduleType.FORMAL_MATCH)) {
+                        opponent = schedule.getOpponent();
+                        competition = schedule.getCompetition();
+                    }
+
+                    String theme = null;
+                    if (type.equals(ScheduleType.ACTIVITY)) {
+                        theme = schedule.getTheme();
+                    }
+
+                    String headlines = schedule.getHeadlines();
+
+                    String duration = schedule.getDuration();
+                    String location = schedule.getLocation();
+                    String summary = schedule.getSummary();
+
+                    BmobDate dateAndTime = schedule.getDateAndTime();
+                    String date = dateAndTime.getDate();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    try {
+                        Date format1 = format.parse(date);
+                        SimpleDateFormat format2 = new SimpleDateFormat("MM月dd日  HH:mm");
+                        String format3 = format2.format(format1);
+                        tvDateAndTime.setText(format3);
+                    } catch (ParseException ee) {
+                        ee.printStackTrace();
+                    }
+
+                    tvOppoent.setText(opponent);
+                    tvCategory.setText(category);
+                    tvLocation.setText(location);
+                    tvSummary.setText(summary);
+                } else {
+                    Toast.makeText(_mActivity, "获取 事件 信息失败" + e.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
