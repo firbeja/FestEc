@@ -70,7 +70,6 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                     + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
                     + "  ;  \nisFirst: " + isFirst);
 
-            initState();
 
             LatteLogger.d("Detail", "onClickEnter() --- 1 --- initState()之后"
                     + "  ;  \nmObjectId: " + mObjectId
@@ -94,7 +93,6 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
 
         if (!isFirst) {
             saveState(ENTER);
-            initState();
         }
 
         if (!mState.equals(LEAVE)) {
