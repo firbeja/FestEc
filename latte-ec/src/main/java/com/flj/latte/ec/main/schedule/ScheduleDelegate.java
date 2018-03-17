@@ -52,7 +52,6 @@ public class ScheduleDelegate extends BottomItemDelegate {
                     LatteDelegate parentDelegate = getParentDelegate();
                     ScheduleAdapter adapter = new ScheduleAdapter(mData,parentDelegate);
                     mRecycleView.setAdapter(adapter);
-                    LatteLogger.d("ScheduleDelegate","ScheduleDelegate-----find=========");
                 } else {
                     LatteLogger.d("BmobQuery", "ScheduleDelegate-----find----null " + e.toString());
                 }

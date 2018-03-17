@@ -115,6 +115,7 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
 
         final String objectId = entity.getField(ScheduleItemFields.objectId);
 
+        //点击整个框跳转到Schedule 详情页面
         LinearLayout eventDetail = holder.getView(R.id.ll_schedule_item);
         eventDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,11 +125,13 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
             }
         });
 
+        //
+
+        //删除键
         TextView icScheduleDelete = holder.getView(R.id.ic_schedule_delete);
         icScheduleDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 DeleteDialog.show();
                 CallbackManager
                         .getInstance()

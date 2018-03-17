@@ -25,7 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="7"
+                android:layout_weight="5"
                 android:layout_marginLeft="20dp"
                 android:text="日期和时间"
                 android:textColor="@color/we_chat_black"
@@ -138,7 +138,7 @@
                     android:layout_marginLeft="30dp"
                     android:text="立即报名"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/indianred"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

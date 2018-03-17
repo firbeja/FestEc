@@ -173,7 +173,7 @@
                     android:layout_marginLeft="30dp"
                     android:text="立即报名"
                     android:layout_centerInParent="true"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/indianred"
                     android:textSize="20sp" />
 
                 <TextView
