@@ -9,5 +9,6 @@ public enum CallbackType {
     TAG_OPEN_PUSH,
     TAG_STOP_PUSH,
     ON_SCAN,
-    DELETE_ITEM
+    DELETE_ITEM,
+    PLAY_MUSIC
 }

@@ -48,8 +48,7 @@ public class AddressDelegate extends LatteDelegate implements ISuccess {
         LatteLogger.d("AddressDelegate", response);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        final List<MultipleItemEntity> data =
-                new AddressDataConverter().setJsonData(response).convert();
+        final List<MultipleItemEntity> data = new AddressDataConverter().setJsonData(response).convert();
         final AddressAdapter addressAdapter = new AddressAdapter(data);
         mRecyclerView.setAdapter(addressAdapter);
     }

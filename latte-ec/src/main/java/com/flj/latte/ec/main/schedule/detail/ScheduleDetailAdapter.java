@@ -53,6 +53,7 @@ public class ScheduleDetailAdapter extends MultipleRecyclerAdapter {
                             }
                         }else {
                             Toast.makeText(Latte.getApplicationContext(), "获取报名人数失败"+e.toString(), Toast.LENGTH_SHORT).show();
+                            LatteLogger.d("ScheduleDetailAdapter","e : " + e.toString());
                         }
                     }
                 });

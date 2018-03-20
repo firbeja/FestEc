@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_schedule_index"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_schedule"
+            android:paddingTop="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="73dp"
-        android:paddingTop="19dp"
-        android:background="@color/we_chat_black">
+        android:background="@color/we_chat_black"
+        android:paddingTop="19dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,11 +40,5 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rl_schedule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

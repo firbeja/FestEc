@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rl_music_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="88dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_music_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:text="恭喜发财"
+            android:textColor="@color/we_chat_black"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_music_control"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tv_music_play"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:gravity="center"
+                android:text="播放"
+                android:textColor="@color/we_chat_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_music_pause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:gravity="center"
+                android:text="暂停"
+                android:textColor="@color/we_chat_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_music_replay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:gravity="center"
+                android:text="继续"
+                android:textColor="@color/we_chat_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_music_next"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:gravity="center"
+                android:text="下一首"
+                android:textColor="@color/we_chat_black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

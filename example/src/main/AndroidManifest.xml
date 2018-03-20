@@ -30,6 +30,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".music.MainActivity">
+
+        </activity>
+
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"

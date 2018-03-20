@@ -6,7 +6,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.0'
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -34,4 +34,5 @@ dependencies {
     compile project(':latte-ui')
     //圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'me.wcy:lrcview:+'
 }

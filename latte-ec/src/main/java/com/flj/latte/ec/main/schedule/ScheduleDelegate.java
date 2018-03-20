@@ -3,6 +3,9 @@ package com.flj.latte.ec.main.schedule;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,7 +15,11 @@ import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
 import com.flj.latte.ec.main.EcBottomDelegate;
+import com.flj.latte.ec.main.index.IndexDataConverter;
+import com.flj.latte.ec.main.index.IndexItemClickListener;
+import com.flj.latte.ui.recycler.BaseDecoration;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
+import com.flj.latte.ui.refresh.RefreshHandler;
 import com.flj.latte.util.log.LatteLogger;
 
 import java.util.List;
@@ -30,6 +37,10 @@ public class ScheduleDelegate extends BottomItemDelegate {
 
     @BindView(R2.id.rl_schedule)
     RecyclerView mRecycleView = null;
+    @BindView(R2.id.srl_schedule_index)
+    SwipeRefreshLayout mRefreshLayout = null;
+
+
     private List<MultipleItemEntity> mData;
 
     @Override
@@ -58,5 +69,14 @@ public class ScheduleDelegate extends BottomItemDelegate {
             }
         });
 
+
+        mRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
+        mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
+
+
 }

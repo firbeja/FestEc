@@ -114,7 +114,7 @@
                             android:id="@+id/tv_schedule_detail_opponent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="广药球队"
+                            android:text="----"
                             android:textColor="@color/we_chat_black"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="1990-1-1 17:00"
+                        android:text="----"
                         android:textColor="@color/we_chat_black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="羽毛球 双打"
+                        android:text="----"
                         android:textColor="@color/we_chat_black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -216,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="广州体育馆"
+                        android:text="----"
                         android:textColor="@color/we_chat_black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -250,7 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="正式赛"
+                        android:text="----"
                         android:textColor="@color/we_chat_black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -284,7 +284,7 @@
                         android:layout_height="match_parent"
                         android:layout_toRightOf="@+id/detail_answered_prefix"
                         android:gravity="center"
-                        android:text="278"
+                        android:text="0"
                         android:textColor="@color/indianred"
                         android:textSize="20sp" />
 
@@ -353,7 +353,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_toRightOf="@+id/detail_enter_prefix"
                                 android:gravity="center"
-                                android:text="176"
+                                android:text="0"
                                 android:textColor="@color/indianred"
                                 android:textSize="16sp" />
 
@@ -370,7 +370,7 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_schedule_detail_enter_recycle_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="200dp">
 
                         </android.support.v7.widget.RecyclerView>
 
@@ -411,7 +411,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_toRightOf="@+id/detail_leave_prefix"
                                 android:gravity="center"
-                                android:text="176"
+                                android:text="0"
                                 android:textColor="@color/indianred"
                                 android:textSize="16sp" />
 
@@ -428,7 +428,7 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_schedule_detail_leave_recycle_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="200dp">
 
                         </android.support.v7.widget.RecyclerView>
                     </LinearLayout>
@@ -467,7 +467,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_toRightOf="@+id/detail_pending_prefix"
                                 android:gravity="center"
-                                android:text="176"
+                                android:text="0"
                                 android:textColor="@color/indianred"
                                 android:textSize="16sp" />
 
@@ -484,7 +484,7 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_schedule_detail_pending_recycle_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="200dp">
 
                         </android.support.v7.widget.RecyclerView>
                     </LinearLayout>
@@ -608,6 +608,7 @@
                 android:layout_width="77dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
                 android:background="@color/dimgray"
