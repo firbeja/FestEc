@@ -65,7 +65,7 @@ public class ExampleActivity extends ProxyActivity implements
 
     @Override
     public void onSignInSuccess() {
-        getSupportDelegate().start(new MusicTabDelegate());
+        getSupportDelegate().start(new EcBottomDelegate());
         Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
     }
 
@@ -79,7 +79,7 @@ public class ExampleActivity extends ProxyActivity implements
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                getSupportDelegate().start(new MusicTabDelegate());
+                getSupportDelegate().start(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
 //                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();

@@ -11,4 +11,6 @@ import cn.bmob.v3.exception.BmobException;
 public interface IDetailState {
 
     void onStateChange(String state);
+
+    void initRecyclerView();
 }

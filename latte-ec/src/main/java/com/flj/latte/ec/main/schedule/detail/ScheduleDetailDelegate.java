@@ -220,10 +220,10 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         //展示 报名 请假 待定 RecycleView
         initThreeRecycleView();
 
-        tvAnswerCount.setText(answerPeopleCount+"");
-        tvEnterCount.setText(enterCount+"");
-        tvLeaveCount.setText(leaveCount+"");
-        tvPendingCount.setText(pendingCount+"");
+//        tvAnswerCount.setText(answerPeopleCount+"");
+//        tvEnterCount.setText(enterCount+"");
+//        tvLeaveCount.setText(leaveCount+"");
+//        tvPendingCount.setText(pendingCount+"");
 
     }
 
@@ -255,16 +255,19 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                             pendingList.add(eventsUserState);
                             pendingCount++;
                         }
+                        if (DETAILSTATE != null && i == (size - 1)) {
+                            DETAILSTATE.initRecyclerView();
+                        }
                     }
 
-                    tvAnswerCount.setText(answerPeopleCount+"");
-                    tvEnterCount.setText(enterCount+"");
-                    tvLeaveCount.setText(leaveCount+"");
-                    tvPendingCount.setText(pendingCount+"");
+//                    tvAnswerCount.setText(answerPeopleCount+"");
+//                    tvEnterCount.setText(enterCount+"");
+//                    tvLeaveCount.setText(leaveCount+"");
+//                    tvPendingCount.setText(pendingCount+"");
 
-                    initEnterRecycle(enterList);
-                    initLeaveRecycle(leaveList);
-                    initPendingRecycle(pendingList);
+//                    initEnterRecycle(enterList);
+//                    initLeaveRecycle(leaveList);
+//                    initPendingRecycle(pendingList);
 
                 }
             }
@@ -274,26 +277,26 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     private void initEnterRecycle(List<EventsUserState> list) {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mEnterRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
-        mEnterRecycleView.setAdapter(adapter);
+        ArrayList<MultipleItemEntity> convert0 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter0 = new ScheduleDetailAdapter(convert0);
+        mEnterRecycleView.setAdapter(adapter0);
     }
 
     private void initLeaveRecycle(List<EventsUserState> list) {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mLeaveRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
-        mLeaveRecycleView.setAdapter(adapter);
+        ArrayList<MultipleItemEntity> convert1 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter1 = new ScheduleDetailAdapter(convert1);
+        mLeaveRecycleView.setAdapter(adapter1);
     }
 
     private void initPendingRecycle(List<EventsUserState> list) {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setAutoMeasureEnabled(true);
         mPendingRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter = new ScheduleDetailAdapter(convert);
-        mPendingRecycleView.setAdapter(adapter);
+        ArrayList<MultipleItemEntity> convert2 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter2 = new ScheduleDetailAdapter(convert2);
+        mPendingRecycleView.setAdapter(adapter2);
     }
 
     private void initDetail() {
@@ -416,7 +419,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
                     if (list.size() > 1) {
                         LatteLogger.d("ScheduleDetailDelegate", "EventsUserState 里相同事件 相同用户 多余 一条记录");
                     }
-
+                    isFirst = true;
                     EventsUserState eventsUserState = list.get(0);
                     eventsUserStateObjectId = eventsUserState.getObjectId();
                     final String state = eventsUserState.getState();
@@ -470,6 +473,25 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
 //                    + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
 //                    + "  ;  \nisFirst: " + isFirst
 //                    + "  ;  \nstate: " + state);
+
+    }
+
+    @Override
+    public void initRecyclerView() {
+        tvAnswerCount.setText(answerPeopleCount + "");
+        tvEnterCount.setText(enterCount + "");
+        tvLeaveCount.setText(leaveCount + "");
+        tvPendingCount.setText(pendingCount + "");
+        if (leaveList != null) {
+            LatteLogger.d("leaveList","leaveList: " + leaveList.get(0).getState());
+            initLeaveRecycle(leaveList);
+        }
+        if (enterList != null) {
+            initEnterRecycle(enterList);
+        }
+        if (pendingList != null) {
+            initPendingRecycle(pendingList);
+        }
 
     }
 

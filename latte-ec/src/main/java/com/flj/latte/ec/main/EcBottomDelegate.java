@@ -34,8 +34,8 @@ public class EcBottomDelegate extends BaseBottomDelegate {
 //        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
 
         items.put(new BottomTabBean("{icon-scan}", "主页"), new ScheduleDelegate());
-//        items.put(new BottomTabBean("{fa-sort}", "创建"), new CreateEventsDelegate());
-        items.put(new BottomTabBean("{fa-sort}","音乐"),new MusicDelegate());
+        items.put(new BottomTabBean("{fa-sort}", "创建"), new CreateEventsDelegate());
+//        items.put(new BottomTabBean("{fa-sort}","音乐"),new MusicDelegate());
 //        items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
 //        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
 //        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
