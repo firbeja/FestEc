@@ -39,7 +39,7 @@ public class ScheduleAdapter extends MultipleRecyclerAdapter {
 
     private final LatteDelegate DELEGATE;
 
-    protected ScheduleAdapter(List<MultipleItemEntity> data,LatteDelegate delegate) {
+    public ScheduleAdapter(List<MultipleItemEntity> data, LatteDelegate delegate) {
         super(data);
         this.DELEGATE = delegate;
         addItemType(ScheduleItemType.ITEM_SCHEDULE_TRAIN, R.layout.item_schedule_train);

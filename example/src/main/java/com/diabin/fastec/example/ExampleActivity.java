@@ -38,7 +38,7 @@ public class ExampleActivity extends ProxyActivity implements
         StatusBarCompat.translucentStatusBar(this, true);
 
         //初始化Bmob
-        Bmob.initialize(this, "127aada0907c6a305b401be63a0a8f0c");
+        Bmob.initialize(this, "127aada0907c6a305b401be63a0a8f0c","Bmob");
     }
 
     @Override

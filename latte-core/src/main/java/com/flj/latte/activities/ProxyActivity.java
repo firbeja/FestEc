@@ -1,6 +1,7 @@
 package com.flj.latte.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +15,16 @@ import android.widget.EditText;
 
 import com.diabin.latte.R;
 import com.flj.latte.delegates.LatteDelegate;
+import com.flj.latte.util.callback.CallbackManager;
+import com.flj.latte.util.callback.CallbackType;
+import com.flj.latte.util.callback.IGlobalCallback;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.SupportActivityDelegate;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
+
+import static android.R.attr.data;
 
 /**
  * Created by 傅令杰 on 2017/4/2
@@ -129,5 +135,18 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
     @Override
     public void onBackPressed() {
         DELEGATE.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("result");
+            IGlobalCallback callback = CallbackManager.getInstance().getCallback(CallbackType.ZXING_SCAN);
+            if (callback!=null){
+                callback.executeCallback(scanResult);
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.flj.latte.ec.main.schedule.detail;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,19 +11,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.app.AccountManager;
+import com.flj.latte.app.Latte;
 import com.flj.latte.app.MyUser;
 import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.main.schedule.Schedule;
 import com.flj.latte.ec.main.schedule.ScheduleItemFields;
 import com.flj.latte.ec.main.schedule.ScheduleType;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
+import com.flj.latte.util.callback.CallbackManager;
+import com.flj.latte.util.callback.CallbackType;
+import com.flj.latte.util.callback.IGlobalCallback;
 import com.flj.latte.util.log.LatteLogger;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
+import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +48,8 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+
+import static com.flj.latte.app.Latte.getApplicationContext;
 
 /**
  * Created by LB-john on 2018/3/16.
@@ -75,6 +87,9 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     TextView tvLeaveCount = null;
     @BindView(R2.id.detail_pending)
     TextView tvPendingCount = null;
+    @BindView(R2.id.iv_schedule_detail_qrcode)
+    ImageView ivQrCode = null;
+
 
     @OnClick(R2.id.tv_schedule_detail_enter)
     void onClickEnter() {
@@ -145,6 +160,31 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         }
     }
 
+    @OnClick(R2.id.icon_schedule_detail_scan)
+    void onClickScanQrCodeAttendance(){
+//        startScanWithCheck(this);
+        //打开扫描界面扫描条形码或二维码
+        Intent openCameraIntent = new Intent(_mActivity, CaptureActivity.class);
+        _mActivity.startActivityForResult(openCameraIntent, 0);
+        CallbackManager.getInstance().addCallback(CallbackType.ZXING_SCAN, new IGlobalCallback<String>() {
+            @Override
+            public void executeCallback(@Nullable String args) {
+                LatteLogger.d("openCameraIntent", "args : " + args);
+                Toast.makeText(_mActivity, args, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @OnClick(R2.id.icon_schedule_detail_qrcode)
+    void onClickGenerateQrCode(){
+
+        //根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
+        Bitmap qrCodeBitmap = EncodingUtils.createQRCode("1405551210 liubin", 350, 350,
+
+                        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+        ivQrCode.setImageBitmap(qrCodeBitmap);
+
+    }
     private static final String ENTER = "enter";
     private static final String LEAVE = "leave";
     private static final String PENDING = "pending";
@@ -225,78 +265,19 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
 //        tvLeaveCount.setText(leaveCount+"");
 //        tvPendingCount.setText(pendingCount+"");
 
-    }
-
-
-    private void initThreeRecycleView() {
-        BmobQuery<EventsUserState> query = new BmobQuery<>();
-        query.addWhereEqualTo("scheduleId", mObjectId);
-        query.findObjects(new FindListener<EventsUserState>() {
+        CallbackManager.getInstance().addCallback(CallbackType.ON_SCAN, new IGlobalCallback<String>() {
             @Override
-            public void done(List<EventsUserState> list, BmobException e) {
-
-                if (e == null) {
-                    enterList = new ArrayList<EventsUserState>();
-                    leaveList = new ArrayList<EventsUserState>();
-                    pendingList = new ArrayList<EventsUserState>();
-
-                    int size = list.size();
-                    answerPeopleCount = size;
-                    for (int i = 0; i < size; i++) {
-                        EventsUserState eventsUserState = list.get(i);
-                        String state = eventsUserState.getState();
-                        if (state.equals(ENTER)) {
-                            enterList.add(eventsUserState);
-                            enterCount++;
-                        } else if (state.equals(LEAVE)) {
-                            leaveList.add(eventsUserState);
-                            leaveCount++;
-                        } else if (state.equals(PENDING)) {
-                            pendingList.add(eventsUserState);
-                            pendingCount++;
-                        }
-                        if (DETAILSTATE != null && i == (size - 1)) {
-                            DETAILSTATE.initRecyclerView();
-                        }
-                    }
-
-//                    tvAnswerCount.setText(answerPeopleCount+"");
-//                    tvEnterCount.setText(enterCount+"");
-//                    tvLeaveCount.setText(leaveCount+"");
-//                    tvPendingCount.setText(pendingCount+"");
-
-//                    initEnterRecycle(enterList);
-//                    initLeaveRecycle(leaveList);
-//                    initPendingRecycle(pendingList);
-
+            public void executeCallback(@Nullable String args) {
+                Toast.makeText(_mActivity, "args : " + args, Toast.LENGTH_SHORT).show();
+                String[] splitArgs = args.split("-");
+                String scheduleId = splitArgs[0];
+                String userId = splitArgs[1];
+                if (scheduleId.equals(mObjectId)){
+                    ScheduleDetailPresenter.saveAttendance(scheduleId, userId);
                 }
             }
         });
-    }
 
-    private void initEnterRecycle(List<EventsUserState> list) {
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        mEnterRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert0 = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter0 = new ScheduleDetailAdapter(convert0);
-        mEnterRecycleView.setAdapter(adapter0);
-    }
-
-    private void initLeaveRecycle(List<EventsUserState> list) {
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        mLeaveRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert1 = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter1 = new ScheduleDetailAdapter(convert1);
-        mLeaveRecycleView.setAdapter(adapter1);
-    }
-
-    private void initPendingRecycle(List<EventsUserState> list) {
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setAutoMeasureEnabled(true);
-        mPendingRecycleView.setLayoutManager(manager);
-        ArrayList<MultipleItemEntity> convert2 = new ScheduleDetailDataConverter().setListData(list).convert();
-        ScheduleDetailAdapter adapter2 = new ScheduleDetailAdapter(convert2);
-        mPendingRecycleView.setAdapter(adapter2);
     }
 
     private void initDetail() {
@@ -493,6 +474,77 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
             initPendingRecycle(pendingList);
         }
 
+    }
+
+    private void initThreeRecycleView() {
+        BmobQuery<EventsUserState> query = new BmobQuery<>();
+        query.addWhereEqualTo("scheduleId", mObjectId);
+        query.findObjects(new FindListener<EventsUserState>() {
+            @Override
+            public void done(List<EventsUserState> list, BmobException e) {
+
+                if (e == null) {
+                    enterList = new ArrayList<EventsUserState>();
+                    leaveList = new ArrayList<EventsUserState>();
+                    pendingList = new ArrayList<EventsUserState>();
+
+                    int size = list.size();
+                    answerPeopleCount = size;
+                    for (int i = 0; i < size; i++) {
+                        EventsUserState eventsUserState = list.get(i);
+                        String state = eventsUserState.getState();
+                        if (state.equals(ENTER)) {
+                            enterList.add(eventsUserState);
+                            enterCount++;
+                        } else if (state.equals(LEAVE)) {
+                            leaveList.add(eventsUserState);
+                            leaveCount++;
+                        } else if (state.equals(PENDING)) {
+                            pendingList.add(eventsUserState);
+                            pendingCount++;
+                        }
+                        if (DETAILSTATE != null && i == (size - 1)) {
+                            DETAILSTATE.initRecyclerView();
+                        }
+                    }
+
+//                    tvAnswerCount.setText(answerPeopleCount+"");
+//                    tvEnterCount.setText(enterCount+"");
+//                    tvLeaveCount.setText(leaveCount+"");
+//                    tvPendingCount.setText(pendingCount+"");
+
+//                    initEnterRecycle(enterList);
+//                    initLeaveRecycle(leaveList);
+//                    initPendingRecycle(pendingList);
+
+                }
+            }
+        });
+    }
+
+    private void initEnterRecycle(List<EventsUserState> list) {
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mEnterRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert0 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter0 = new ScheduleDetailAdapter(convert0);
+        mEnterRecycleView.setAdapter(adapter0);
+    }
+
+    private void initLeaveRecycle(List<EventsUserState> list) {
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mLeaveRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert1 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter1 = new ScheduleDetailAdapter(convert1);
+        mLeaveRecycleView.setAdapter(adapter1);
+    }
+
+    private void initPendingRecycle(List<EventsUserState> list) {
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setAutoMeasureEnabled(true);
+        mPendingRecycleView.setLayoutManager(manager);
+        ArrayList<MultipleItemEntity> convert2 = new ScheduleDetailDataConverter().setListData(list).convert();
+        ScheduleDetailAdapter adapter2 = new ScheduleDetailAdapter(convert2);
+        mPendingRecycleView.setAdapter(adapter2);
     }
 
 }

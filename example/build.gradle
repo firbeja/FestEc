@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.1'
     defaultConfig {
         applicationId "com.diabin.fastec.example"
         minSdkVersion 16
@@ -10,28 +10,29 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+//        multiDexEnabled true
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+//            abiFilters 'armeabi-v7a'
         }
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "26a34a494a1d5dc03b133b24",
+                JPUSH_APPKEY : "def43d5fd5415d4ab0d14a2d",
                 JPUSH_CHANNEL: "developer-default",
         ]
     }
 
-    productFlavors {
-        qihoo {
-            applicationId "com.coolweather.android.qihoo"
-        }
-        baidu {
-            applicationId "com.coolweather.android.baidu"
-        }
-    }
+//    productFlavors {
+//        qihoo {
+//            applicationId "com.coolweather.android.qihoo"
+//        }
+//        baidu {
+//            applicationId "com.coolweather.android.baidu"
+//        }
+//    }
 
     buildTypes {
         release {
@@ -41,6 +42,9 @@ android {
     }
     productFlavors {
     }
+
+
+
 }
 
 dependencies {
@@ -53,8 +57,10 @@ dependencies {
     provided project(':latte-annotations')
     annotationProcessor project(':latte-compiler')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'cn.jiguang.sdk:jpush:3.0.1'
-    compile 'cn.jiguang.sdk:jcore:1.1.0'
+    compile 'cn.jiguang.sdk:jpush:3.1.1'
+    // 此处以JPush 3.1.1 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.9'
+    // 此处以JCore 1.1.9 版本为例。
     compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }

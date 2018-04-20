@@ -43,12 +43,12 @@ public class OrderCommentDelegate extends LatteDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         mAutoPhotoLayout.setDelegate(this);
-        CallbackManager.getInstance()
-                .addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>() {
-                    @Override
-                    public void executeCallback(@Nullable Uri args) {
-                        mAutoPhotoLayout.onCropTarget(args);
-                    }
-                });
+//        CallbackManager.getInstance()
+//                .addCallback(CallbackType.ON_CROP, new IGlobalCallback<Uri>() {
+//                    @Override
+//                    public void executeCallback(@Nullable Uri args) {
+//                        mAutoPhotoLayout.onCropTarget(args);
+//                    }
+//                });
     }
 }

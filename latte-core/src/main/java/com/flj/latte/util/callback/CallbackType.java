@@ -10,5 +10,6 @@ public enum CallbackType {
     TAG_STOP_PUSH,
     ON_SCAN,
     DELETE_ITEM,
-    PLAY_MUSIC
+    PLAY_MUSIC,
+    ZXING_SCAN
 }

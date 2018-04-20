@@ -8,12 +8,14 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
+import com.flj.latte.app.AccountManager;
+import com.flj.latte.app.MyUser;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
 import com.flj.latte.ec.main.create.HistoryType;
-import com.flj.latte.ec.main.create.train.location.LocationItemType;
 import com.flj.latte.ec.main.schedule.Schedule;
 import com.flj.latte.ec.main.schedule.ScheduleType;
 import com.flj.latte.ec.main.create.train.location.LocationDelegate;
@@ -26,6 +28,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -117,10 +120,13 @@ public class TrainDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.btn_train_create)
     void onClickTrainCreate(){
-
-        TrainCreate();
-
+        if (AccountManager.checkIsPermission()){
+            TrainCreate();
+        }else {
+            Toast.makeText(_mActivity, "没有权限创建", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     public void TrainCreate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

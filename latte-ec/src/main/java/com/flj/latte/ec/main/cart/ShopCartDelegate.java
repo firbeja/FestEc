@@ -16,8 +16,8 @@ import com.alibaba.fastjson.JSON;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
-import com.flj.latte.ec.pay.FastPay;
-import com.flj.latte.ec.pay.IAlPayResultListener;
+//import com.flj.latte.ec.pay.FastPay;
+//import com.flj.latte.ec.pay.IAlPayResultListener;
 import com.flj.latte.net.RestClient;
 import com.flj.latte.net.callback.ISuccess;
 import com.flj.latte.ui.recycler.MultipleItemEntity;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Created by 傅令杰
  */
 
-public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener, IAlPayResultListener {
+public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener {
 
     private ShopCartAdapter mAdapter = null;
     //购物车数量标记
@@ -85,7 +85,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
             int removePosition;
             final int entityPosition = entity.getField(ShopCartItemFields.POSITION);
             if (entityPosition > mCurrentCount - 1) {
-                removePosition = entityPosition - (mTotalCount - mCurrentCount +1);
+                removePosition = entityPosition - (mTotalCount - mCurrentCount + 1);
             } else {
                 removePosition = entityPosition;
             }
@@ -115,7 +115,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
     private void createOrder() {
         final String orderUrl = "你的生成订单的API";
         final WeakHashMap<String, Object> orderParams = new WeakHashMap<>();
-       //加入你的参数
+        //加入你的参数
         RestClient.builder()
                 .url(orderUrl)
                 .loader(getContext())
@@ -126,10 +126,10 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
                         //进行具体的支付
                         LatteLogger.d("ORDER", response);
                         final int orderId = JSON.parseObject(response).getInteger("result");
-                        FastPay.create(ShopCartDelegate.this)
-                                .setPayResultListener(ShopCartDelegate.this)
-                                .setOrderId(orderId)
-                                .beginPayDialog();
+//                        FastPay.create(ShopCartDelegate.this)
+//                                .setPayResultListener(ShopCartDelegate.this)
+//                                .setOrderId(orderId)
+//                                .beginPayDialog();
                     }
                 })
                 .build()
@@ -142,8 +142,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         final int count = mAdapter.getItemCount();
         if (count == 0) {
             final View stubView = mStubNoItem.inflate();
-            final AppCompatTextView tvToBuy =
-                    (AppCompatTextView) stubView.findViewById(R.id.tv_stub_to_buy);
+            final AppCompatTextView tvToBuy = (AppCompatTextView) stubView.findViewById(R.id.tv_stub_to_buy);
             tvToBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -199,28 +198,28 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         mTvTotalPrice.setText(String.valueOf(price));
     }
 
-    @Override
-    public void onPaySuccess() {
-
-    }
-
-    @Override
-    public void onPaying() {
-
-    }
-
-    @Override
-    public void onPayFail() {
-
-    }
-
-    @Override
-    public void onPayCancel() {
-
-    }
-
-    @Override
-    public void onPayConnectError() {
-
-    }
+//    @Override
+//    public void onPaySuccess() {
+//
+//    }
+//
+//    @Override
+//    public void onPaying() {
+//
+//    }
+//
+//    @Override
+//    public void onPayFail() {
+//
+//    }
+//
+//    @Override
+//    public void onPayCancel() {
+//
+//    }
+//
+//    @Override
+//    public void onPayConnectError() {
+//
+//    }
 }

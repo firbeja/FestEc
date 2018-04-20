@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
+import com.flj.latte.app.AccountManager;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
 import com.flj.latte.ec.main.create.HistoryType;
 import com.flj.latte.ec.main.create.train.location.LocationDelegate;
@@ -130,9 +131,9 @@ public class FriendlyDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.btn_train_create)
     void onClickTrainCreate() {
-
-        TrainCreate();
-
+        if (AccountManager.checkIsPermission()){
+            TrainCreate();
+        }
     }
 
     public void TrainCreate() {

@@ -3,8 +3,8 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.1'
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
@@ -13,6 +13,13 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //
+//        multiDexEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
+//            abiFilters 'armeabi-v7a'
+        }
     }
     buildTypes {
         release {
@@ -22,6 +29,7 @@ android {
     }
     productFlavors {
     }
+
 }
 
 dependencies {
@@ -34,5 +42,7 @@ dependencies {
     compile project(':latte-ui')
     //圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'me.wcy:lrcview:+'
+    compile 'me.wcy:lrcview:2.0.1'
+    //    compile'cn.bertsir.zbarLibary:zbarlibary:latest.release'
+        compile project(':libzxing')
 }

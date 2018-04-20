@@ -12,6 +12,7 @@ import com.flj.latte.ec.main.discover.DiscoverDelegate;
 import com.flj.latte.ec.main.index.IndexDelegate;
 import com.flj.latte.ec.main.music.list.MusicDelegate;
 import com.flj.latte.ec.main.personal.PersonalDelegate;
+import com.flj.latte.ec.main.ranking.RankingDelegate;
 import com.flj.latte.ec.main.schedule.ScheduleDelegate;
 import com.flj.latte.ec.main.sort.SortDelegate;
 
@@ -26,7 +27,7 @@ public class EcBottomDelegate extends BaseBottomDelegate {
     @Override
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
-//        items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
+        items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
 //        items.put(new BottomTabBean("{icon-scan}", "主页"), new IndexDelegate());
 //        items.put(new BottomTabBean("{fa-sort}", "分类"), new SortDelegate());
 //        items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
@@ -35,6 +36,7 @@ public class EcBottomDelegate extends BaseBottomDelegate {
 
         items.put(new BottomTabBean("{icon-scan}", "主页"), new ScheduleDelegate());
         items.put(new BottomTabBean("{fa-sort}", "创建"), new CreateEventsDelegate());
+        items.put(new BottomTabBean("{fa-compass}", "排行榜"), new RankingDelegate());
 //        items.put(new BottomTabBean("{fa-sort}","音乐"),new MusicDelegate());
 //        items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
 //        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());

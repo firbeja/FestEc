@@ -242,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             Music music = getItem(position);
             View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
-            TextView musicChinese = view.findViewById(R.id.misic_chinese);
-            TextView musicEnglish = view.findViewById(R.id.music_english);
+            TextView musicChinese = (TextView) view.findViewById(R.id.misic_chinese);
+            TextView musicEnglish = (TextView) view.findViewById(R.id.music_english);
             musicChinese.setText(music.getNameChinese());
             musicEnglish.setText(music.getNameEnglish());
 

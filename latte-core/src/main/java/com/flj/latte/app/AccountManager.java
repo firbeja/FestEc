@@ -42,4 +42,13 @@ public class AccountManager {
             checker.onNotSignIn();
         }
     }
+
+    public static boolean checkIsPermission(){
+        String username = getMyUser().getUsername();
+        Boolean flag = false;
+        if (username.equals("LiuBin1")){
+            flag = true;
+        }
+        return flag;
+    }
 }
