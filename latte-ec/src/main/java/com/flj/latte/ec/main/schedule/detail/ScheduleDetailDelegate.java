@@ -94,41 +94,9 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     @OnClick(R2.id.tv_schedule_detail_enter)
     void onClickEnter() {
 
-        LatteLogger.d("Detail", "onClickEnter() --- 1"
-                + "  ;  \nmObjectId: " + mObjectId
-                + "  ;  \nmyUserId: " + myUserId
-                + "  ;  \nmState: " + mState
-                + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                + "  ;  \nisFirst: " + isFirst);
-
         if (!isFirst) {
-
-            LatteLogger.d("Detail", "onClickEnter() --- 1 --- if (!isFirst)"
-                    + "  ;  \nmObjectId: " + mObjectId
-                    + "  ;  \nmyUserId: " + myUserId
-                    + "  ;  \nmState: " + mState
-                    + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                    + "  ;  \nisFirst: " + isFirst);
-
             saveState(ENTER);
-
-            LatteLogger.d("Detail", "onClickEnter() --- 1 --- 在saveState(ENTER) 之后 ， initState()之前"
-                    + "  ;  \nmObjectId: " + mObjectId
-                    + "  ;  \nmyUserId: " + myUserId
-                    + "  ;  \nmState: " + mState
-                    + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                    + "  ;  \nisFirst: " + isFirst);
-
-
-            LatteLogger.d("Detail", "onClickEnter() --- 1 --- initState()之后"
-                    + "  ;  \nmObjectId: " + mObjectId
-                    + "  ;  \nmyUserId: " + myUserId
-                    + "  ;  \nmState: " + mState
-                    + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                    + "  ;  \nisFirst: " + isFirst);
-
         }
-
 
         if (!mState.equals(ENTER)) {
             //更新 EventUserState 表 的状态，更新为 报名 enter
@@ -161,35 +129,23 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     }
 
     @OnClick(R2.id.icon_schedule_detail_scan)
-    void onClickScanQrCodeAttendance(){
-//        startScanWithCheck(this);
-        //打开扫描界面扫描条形码或二维码
+    void onClickScanQrCodeAttendance() {
         Intent openCameraIntent = new Intent(_mActivity, CaptureActivity.class);
         _mActivity.startActivityForResult(openCameraIntent, 0);
-        CallbackManager.getInstance().addCallback(CallbackType.ZXING_SCAN, new IGlobalCallback<String>() {
-            @Override
-            public void executeCallback(@Nullable String args) {
-                LatteLogger.d("openCameraIntent", "args : " + args);
-                Toast.makeText(_mActivity, args, Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @OnClick(R2.id.icon_schedule_detail_qrcode)
-    void onClickGenerateQrCode(){
-
+    void onClickGenerateQrCode() {
         //根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
         Bitmap qrCodeBitmap = EncodingUtils.createQRCode("1405551210 liubin", 350, 350,
-
-                        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         ivQrCode.setImageBitmap(qrCodeBitmap);
-
     }
+
     private static final String ENTER = "enter";
     private static final String LEAVE = "leave";
     private static final String PENDING = "pending";
     private static final String ARG_SCHEDULE_OBJECT_ID = "ARG_SCHEDULE_OBJECT_ID";
-    private static final String ERRORMESSAGE = "errorCode:9015,errorMsg:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0";
 
     private IDetailState DETAILSTATE;
     //事件的objectId
@@ -237,42 +193,37 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        LatteLogger.d("Detail", "onBindView  ()"
-                + "  ;  \nmObjectId: " + mObjectId
-                + "  ;  \nmyUserId: " + myUserId
-                + "  ;  \nmState: " + mState
-                + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                + "  ;  \nisFirst: " + isFirst);
+        enterList = new ArrayList<>();
+        leaveList = new ArrayList<>();
+        pendingList = new ArrayList<>();
+
+        if (enterList != null && enterList.size() > 0) {
+            initEnterRecycle(enterList);
+        }
+        if (leaveList != null && leaveList.size() > 0) {
+            initLeaveRecycle(leaveList);
+        }
+        if (pendingList != null && pendingList.size() > 0) {
+            initPendingRecycle(pendingList);
+        }
+
 
         initState();
         setListener(this);
 
-        LatteLogger.d("Detail", "onBindView  ()  --- 运行了 initState() 之后"
-                + "  ;  \nmObjectId: " + mObjectId
-                + "  ;  \nmyUserId: " + myUserId
-                + "  ;  \nmState: " + mState
-                + "  ;  \neventsUserStateObjectId: " + eventsUserStateObjectId
-                + "  ;  \nisFirst: " + isFirst);
-
         //更新页面数据
         initDetail();
-
         //展示 报名 请假 待定 RecycleView
         initThreeRecycleView();
 
-//        tvAnswerCount.setText(answerPeopleCount+"");
-//        tvEnterCount.setText(enterCount+"");
-//        tvLeaveCount.setText(leaveCount+"");
-//        tvPendingCount.setText(pendingCount+"");
-
-        CallbackManager.getInstance().addCallback(CallbackType.ON_SCAN, new IGlobalCallback<String>() {
+        CallbackManager.getInstance().addCallback(CallbackType.ZXING_SCAN, new IGlobalCallback<String>() {
             @Override
             public void executeCallback(@Nullable String args) {
                 Toast.makeText(_mActivity, "args : " + args, Toast.LENGTH_SHORT).show();
-                String[] splitArgs = args.split("-");
+                String[] splitArgs = args.split(" ");
                 String scheduleId = splitArgs[0];
                 String userId = splitArgs[1];
-                if (scheduleId.equals(mObjectId)){
+                if (scheduleId.equals(mObjectId)) {
                     ScheduleDetailPresenter.saveAttendance(scheduleId, userId);
                 }
             }
@@ -458,23 +409,20 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     }
 
     @Override
-    public void initRecyclerView() {
-        tvAnswerCount.setText(answerPeopleCount + "");
-        tvEnterCount.setText(enterCount + "");
-        tvLeaveCount.setText(leaveCount + "");
-        tvPendingCount.setText(pendingCount + "");
-        if (leaveList != null) {
-            LatteLogger.d("leaveList","leaveList: " + leaveList.get(0).getState());
-            initLeaveRecycle(leaveList);
-        }
-        if (enterList != null) {
-            initEnterRecycle(enterList);
-        }
-        if (pendingList != null) {
-            initPendingRecycle(pendingList);
-        }
-
+    public void onInitEnterRecyclerView() {
+        initEnterRecycle(enterList);
     }
+
+    @Override
+    public void onInitLeaveRecyclerView() {
+        initLeaveRecycle(leaveList);
+    }
+
+    @Override
+    public void onInitPendingRecyclerView() {
+        initPendingRecycle(pendingList);
+    }
+
 
     private void initThreeRecycleView() {
         BmobQuery<EventsUserState> query = new BmobQuery<>();
@@ -482,40 +430,55 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         query.findObjects(new FindListener<EventsUserState>() {
             @Override
             public void done(List<EventsUserState> list, BmobException e) {
-
                 if (e == null) {
-                    enterList = new ArrayList<EventsUserState>();
-                    leaveList = new ArrayList<EventsUserState>();
-                    pendingList = new ArrayList<EventsUserState>();
-
                     int size = list.size();
                     answerPeopleCount = size;
+                    tvAnswerCount.setText(answerPeopleCount + "");
                     for (int i = 0; i < size; i++) {
                         EventsUserState eventsUserState = list.get(i);
                         String state = eventsUserState.getState();
                         if (state.equals(ENTER)) {
                             enterList.add(eventsUserState);
                             enterCount++;
+                            LatteLogger.d("enterCount", "enterCount : " + enterCount);
+                            tvEnterCount.setText(answerPeopleCount + "");
                         } else if (state.equals(LEAVE)) {
                             leaveList.add(eventsUserState);
                             leaveCount++;
+                            tvLeaveCount.setText(leaveCount + "");
                         } else if (state.equals(PENDING)) {
                             pendingList.add(eventsUserState);
                             pendingCount++;
+                            tvPendingCount.setText(pendingCount + "");
                         }
-                        if (DETAILSTATE != null && i == (size - 1)) {
-                            DETAILSTATE.initRecyclerView();
+                        if (DETAILSTATE != null && i == size - 1) {
+
+
+                            if (enterList.size() == 0 && leaveList.size() == 0){
+                                initPendingRecycle(pendingList);
+                            }
+                            if (enterList.size() == 0) {
+                                initLeaveRecycle(leaveList);
+                                initPendingRecycle(pendingList);
+                            }
+                            initEnterRecycle(enterList);
+                            initLeaveRecycle(leaveList);
+                            initPendingRecycle(pendingList);
+//                            DETAILSTATE.onInitEnterRecyclerView();
+//                            DETAILSTATE.onInitLeaveRecyclerView();
+//                            DETAILSTATE.onInitPendingRecyclerView();
+
+
                         }
                     }
 
-//                    tvAnswerCount.setText(answerPeopleCount+"");
-//                    tvEnterCount.setText(enterCount+"");
-//                    tvLeaveCount.setText(leaveCount+"");
-//                    tvPendingCount.setText(pendingCount+"");
 
 //                    initEnterRecycle(enterList);
 //                    initLeaveRecycle(leaveList);
 //                    initPendingRecycle(pendingList);
+//                    DETAILSTATE.onInitEnterRecyclerView();
+//                    DETAILSTATE.onInitLeaveRecyclerView();
+//                    DETAILSTATE.onInitPendingRecyclerView();
 
                 }
             }

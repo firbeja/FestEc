@@ -12,5 +12,7 @@ public interface IDetailState {
 
     void onStateChange(String state);
 
-    void initRecyclerView();
+    void onInitEnterRecyclerView();
+    void onInitLeaveRecyclerView();
+    void onInitPendingRecyclerView();
 }
