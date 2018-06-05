@@ -26,9 +26,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 import static android.R.attr.data;
 
-/**
- * Created by 傅令杰 on 2017/4/2
- */
+
 
 public abstract class ProxyActivity extends AppCompatActivity implements ISupportActivity {
 

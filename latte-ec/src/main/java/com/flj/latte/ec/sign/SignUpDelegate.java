@@ -20,9 +20,7 @@ import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-/**
- * Created by 傅令杰 on 2017/4/22
- */
+
 
 public class SignUpDelegate extends LatteDelegate {
 

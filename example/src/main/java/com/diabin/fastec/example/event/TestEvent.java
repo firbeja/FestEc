@@ -5,9 +5,7 @@ import android.widget.Toast;
 
 import com.flj.latte.delegates.web.event.Event;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class TestEvent extends Event {
     @Override

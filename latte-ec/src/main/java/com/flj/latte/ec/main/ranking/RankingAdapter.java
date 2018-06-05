@@ -40,6 +40,7 @@ public class RankingAdapter extends MultipleRecyclerAdapter {
         super.convert(holder, entity);
         switch (holder.getItemViewType()) {
             case RankingItemType.Ranking:
+                TextView title = holder.getView(R.id.tv_ranking_title);
                 TextView userName1 = holder.getView(R.id.tv_ranking_user_name_1);
                 TextView userName2 = holder.getView(R.id.tv_ranking_user_name_2);
                 TextView userName3 = holder.getView(R.id.tv_ranking_user_name_3);
@@ -50,6 +51,9 @@ public class RankingAdapter extends MultipleRecyclerAdapter {
                 TextView userName8 = holder.getView(R.id.tv_ranking_user_name_8);
                 TextView userName9 = holder.getView(R.id.tv_ranking_user_name_9);
                 TextView userName10 = holder.getView(R.id.tv_ranking_user_name_10);
+
+                String type = entity.getField(RankingItemFields.TYPE);
+                title.setText(type);
 
                 JSONArray jsonArray = entity.getField(RankingItemFields.ENTERLIST);
 

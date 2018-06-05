@@ -137,7 +137,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
     @OnClick(R2.id.icon_schedule_detail_qrcode)
     void onClickGenerateQrCode() {
         //根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
-        Bitmap qrCodeBitmap = EncodingUtils.createQRCode("1405551210 liubin", 350, 350,
+        Bitmap qrCodeBitmap = EncodingUtils.createQRCode(mObjectId+" "+myUserId, 350, 350,
                 BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         ivQrCode.setImageBitmap(qrCodeBitmap);
     }
@@ -219,7 +219,7 @@ public class ScheduleDetailDelegate extends LatteDelegate implements IDetailStat
         CallbackManager.getInstance().addCallback(CallbackType.ZXING_SCAN, new IGlobalCallback<String>() {
             @Override
             public void executeCallback(@Nullable String args) {
-                Toast.makeText(_mActivity, "args : " + args, Toast.LENGTH_SHORT).show();
+
                 String[] splitArgs = args.split(" ");
                 String scheduleId = splitArgs[0];
                 String userId = splitArgs[1];

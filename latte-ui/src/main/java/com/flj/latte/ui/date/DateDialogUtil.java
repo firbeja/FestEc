@@ -14,9 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class DateDialogUtil {
 

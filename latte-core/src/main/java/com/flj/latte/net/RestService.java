@@ -19,9 +19,7 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
-/**
- * Created by 傅令杰 on 2017/4/2
- */
+
 public interface RestService {
 
     @GET

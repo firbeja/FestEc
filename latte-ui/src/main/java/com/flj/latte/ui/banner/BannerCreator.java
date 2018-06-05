@@ -7,9 +7,7 @@ import com.flj.latte.ui.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class BannerCreator {
 

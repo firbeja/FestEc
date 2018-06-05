@@ -4,9 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by 傅令杰 on 2017/4/22
- */
+
 @Entity(nameInDb = "user_profile")
 public class UserProfile {
     @Id

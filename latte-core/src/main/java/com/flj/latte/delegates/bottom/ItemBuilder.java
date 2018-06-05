@@ -2,9 +2,7 @@ package com.flj.latte.delegates.bottom;
 
 import java.util.LinkedHashMap;
 
-/**
- * Created by 傅令杰
- */
+
 
 public final class ItemBuilder {
 

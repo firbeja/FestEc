@@ -3,9 +3,7 @@ package com.flj.latte.ec.sign;
 import com.flj.latte.app.AccountManager;
 import com.flj.latte.app.MyUser;
 
-/**
- * Created by 傅令杰 on 2017/4/22
- */
+
 
 public class SignHandler {
 

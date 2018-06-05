@@ -17,9 +17,7 @@ import com.flj.latte.ui.banner.BannerCreator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class MultipleRecyclerAdapter extends
         BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>

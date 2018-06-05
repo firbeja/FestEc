@@ -24,9 +24,7 @@
 //import com.tencent.mm.opensdk.modelpay.PayReq;
 //import com.tencent.mm.opensdk.openapi.IWXAPI;
 //
-///**
-// * Created by 傅令杰
-// */
+
 //
 //public class FastPay implements View.OnClickListener {
 //

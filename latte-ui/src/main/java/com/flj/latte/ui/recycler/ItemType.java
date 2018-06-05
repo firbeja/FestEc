@@ -1,8 +1,6 @@
 package com.flj.latte.ui.recycler;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class ItemType {
     public static final int TEXT = 1;

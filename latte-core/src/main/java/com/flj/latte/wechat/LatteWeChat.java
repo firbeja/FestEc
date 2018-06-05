@@ -9,9 +9,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-/**
- * Created by 傅令杰 on 2017/4/25
- */
+
 
 public class LatteWeChat {
     public static final String APP_ID = Latte.getConfiguration(ConfigKeys.WE_CHAT_APP_ID);

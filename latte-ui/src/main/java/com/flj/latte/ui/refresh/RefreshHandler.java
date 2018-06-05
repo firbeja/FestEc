@@ -20,9 +20,7 @@ import cn.bmob.v3.exception.BmobException;
 
 import static com.blankj.utilcode.util.Utils.getContext;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class RefreshHandler implements
         SwipeRefreshLayout.OnRefreshListener

@@ -15,6 +15,7 @@ import com.flj.latte.delegates.LatteDelegate;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.util.log.LatteLogger;
+import com.flj.latte.util.storage.LattePreference;
 import com.flj.latte.wechat.LatteWeChat;
 import com.flj.latte.wechat.callbacks.IWeChatSignInCallback;
 
@@ -23,9 +24,7 @@ import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-/**
- * Created by 傅令杰 on 2017/4/22
- */
+
 
 public class SignInDelegate extends LatteDelegate {
 
@@ -73,6 +72,8 @@ public class SignInDelegate extends LatteDelegate {
                 public void done(MyUser myUser, BmobException e) {
                     if (e == null){
                         SignHandler.onSignIn(myUser, mISignListener);
+                        String sessionToken = myUser.getSessionToken();
+                        LattePreference.addCustomAppProfile("Token",sessionToken);
                         Toast.makeText(Latte.getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
                     }else {
                         LatteLogger.d("signin","登录失败"+ e.toString());

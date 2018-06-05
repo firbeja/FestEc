@@ -6,9 +6,7 @@
 //
 //import me.dm7.barcodescanner.core.ViewFinderView;
 //
-///**
-// * Created by 傅令杰
-// */
+
 //
 //public class LatteViewFinderView extends ViewFinderView {
 //

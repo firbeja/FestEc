@@ -16,9 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by 傅令杰 on 2017/4/2
- */
+
 
 public final class DownloadHandler {
 

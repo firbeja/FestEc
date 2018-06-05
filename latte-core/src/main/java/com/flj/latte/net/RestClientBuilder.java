@@ -15,9 +15,7 @@ import java.util.WeakHashMap;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-/**
- * Created by 傅令杰 on 2017/4/2
- */
+
 
 public final class RestClientBuilder {
 

@@ -2,9 +2,7 @@ package com.flj.latte.app;
 
 import cn.bmob.v3.BmobUser;
 
-/**
- * Created by LB-john on 2018/3/12.
- */
+
 
 public class MyUser extends BmobUser {
 

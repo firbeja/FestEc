@@ -6,9 +6,7 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.util.LinkedHashMap;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class MultipleItemEntity implements MultiItemEntity {
 

@@ -9,9 +9,7 @@ import android.support.annotation.ColorInt;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class CircleTextView extends AppCompatTextView {
 

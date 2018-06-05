@@ -3,9 +3,7 @@ package com.flj.latte.wechat;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 
-/**
- * Created by 傅令杰
- */
+
 
 public abstract class BaseWXPayEntryActivity extends BaseWXActivity {
 

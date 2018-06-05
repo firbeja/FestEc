@@ -5,10 +5,7 @@ import android.net.Uri;
 import com.flj.latte.delegates.PermissionCheckerDelegate;
 import com.flj.latte.util.file.FileUtil;
 
-/**
- * Created by 傅令杰
- * 照相机调用类
- */
+
 
 public class LatteCamera {
 

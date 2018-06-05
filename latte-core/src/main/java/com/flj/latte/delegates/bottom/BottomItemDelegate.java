@@ -6,9 +6,7 @@ import com.diabin.latte.R;
 import com.flj.latte.app.Latte;
 import com.flj.latte.delegates.LatteDelegate;
 
-/**
- * Created by 傅令杰
- */
+
 
 public abstract class BottomItemDelegate extends LatteDelegate {
     // 再点一次退出程序时间设置

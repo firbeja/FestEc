@@ -12,7 +12,6 @@ import com.flj.latte.ec.launcher.LauncherDelegate;
 import com.flj.latte.ec.main.EcBottomDelegate;
 import com.flj.latte.ec.main.music.MusicTabDelegate;
 import com.flj.latte.ec.main.music.list.MusicDelegate;
-import com.flj.latte.ec.main.personal.address.AddressDelegate;
 import com.flj.latte.ec.sign.ISignListener;
 import com.flj.latte.ec.sign.SignInDelegate;
 import com.flj.latte.ui.launcher.ILauncherListener;

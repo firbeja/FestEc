@@ -10,13 +10,11 @@ import android.view.View;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
 import com.flj.latte.delegates.bottom.BottomItemDelegate;
-import com.flj.latte.ec.main.personal.address.AddressDelegate;
+import com.flj.latte.ec.launcher.LauncherDelegate;
 import com.flj.latte.ec.main.personal.list.ListAdapter;
 import com.flj.latte.ec.main.personal.list.ListBean;
 import com.flj.latte.ec.main.personal.list.ListItemType;
-import com.flj.latte.ec.main.personal.order.OrderListDelegate;
 import com.flj.latte.ec.main.personal.profile.UserProfileDelegate;
-import com.flj.latte.ec.main.personal.settings.SettingsDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class PersonalDelegate extends BottomItemDelegate {
 
@@ -41,21 +37,9 @@ public class PersonalDelegate extends BottomItemDelegate {
         return R.layout.delegate_personal;
     }
 
-    @OnClick(R2.id.tv_all_order)
-    void onClickAllOrder() {
-        mArgs.putString(ORDER_TYPE, "all");
-        startOrderListByType();
-    }
-
     @OnClick(R2.id.img_user_avatar)
     void onClickAvatar() {
         getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
-    }
-
-    private void startOrderListByType() {
-        final OrderListDelegate delegate = new OrderListDelegate();
-        delegate.setArguments(mArgs);
-        getParentDelegate().getSupportDelegate().start(delegate);
     }
 
     @Override
@@ -67,23 +51,30 @@ public class PersonalDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        final ListBean address = new ListBean.Builder()
+        final ListBean attendance = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
-                .setDelegate(new AddressDelegate())
-                .setText("收货地址")
+                .setText("出勤次数")
                 .build();
 
-        final ListBean system = new ListBean.Builder()
+        final ListBean changePassword = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
-                .setDelegate(new SettingsDelegate())
-                .setText("系统设置")
+                .setDelegate(new ChangePasswordDelegate())
+                .setText("修改密码")
+                .build();
+
+        final ListBean signOut = new ListBean.Builder()
+                .setItemType(ListItemType.ITEM_NORMAL)
+                .setId(3)
+                .setDelegate(new LauncherDelegate())
+                .setText("退出登录")
                 .build();
 
         final List<ListBean> data = new ArrayList<>();
-        data.add(address);
-        data.add(system);
+        data.add(attendance);
+        data.add(changePassword);
+        data.add(signOut);
 
         //设置RecyclerView
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());

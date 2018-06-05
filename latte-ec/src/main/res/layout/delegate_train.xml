@@ -307,21 +307,23 @@
                 android:layout_marginTop="7dp"
                 android:background="@color/app_background" />
 
+            <Button
+                android:id="@+id/btn_train_create"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/holo_red_light"
+                android:gravity="center"
+                android:text="创建训练"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
         </LinearLayout>
 
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_train_create"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
-        android:gravity="center"
-        android:text="创建训练"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
+
 
 
 </RelativeLayout>

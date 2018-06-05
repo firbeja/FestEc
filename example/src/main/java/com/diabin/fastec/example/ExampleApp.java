@@ -18,9 +18,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import cn.bmob.v3.Bmob;
 import cn.jpush.android.api.JPushInterface;
 
-/**
- * Created by 傅令杰 on 2017/3/29
- */
+
 public class ExampleApp extends MultiDexApplication {
 
 

@@ -1,5 +1,8 @@
 package com.flj.latte.ec.main.schedule.detail;
 
+import android.widget.Toast;
+
+import com.flj.latte.app.Latte;
 import com.flj.latte.util.log.LatteLogger;
 
 import cn.bmob.v3.exception.BmobException;
@@ -20,10 +23,10 @@ public class ScheduleDetailPresenter {
             public void done(String s, BmobException e) {
                 if (e == null) {
                     LatteLogger.d("attendance", s);
+                    Toast.makeText(Latte.getApplicationContext(), "登记出勤成功", Toast.LENGTH_SHORT).show();
                 } else {
                     LatteLogger.d("attendance", "e : " + e);
                 }
-
             }
         });
     }

@@ -1,8 +1,6 @@
 package com.flj.latte.ui.refresh;
 
-/**
- * Created by 傅令杰
- */
+
 
 public final class PagingBean {
     //当前是第几页

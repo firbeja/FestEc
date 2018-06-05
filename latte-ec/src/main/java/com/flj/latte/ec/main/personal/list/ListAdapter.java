@@ -12,9 +12,7 @@ import com.diabin.latte.ec.R;
 
 import java.util.List;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHolder> {
 

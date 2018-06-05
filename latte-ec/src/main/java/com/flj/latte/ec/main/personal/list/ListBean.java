@@ -5,9 +5,7 @@ import android.widget.CompoundButton;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.flj.latte.delegates.LatteDelegate;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class ListBean implements MultiItemEntity {
 

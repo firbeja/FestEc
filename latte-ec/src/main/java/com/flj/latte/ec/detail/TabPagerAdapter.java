@@ -9,9 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 

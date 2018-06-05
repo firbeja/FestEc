@@ -24,9 +24,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by 傅令杰
- */
+
 
 public final class AutoPhotoLayout extends LinearLayoutCompat {
 

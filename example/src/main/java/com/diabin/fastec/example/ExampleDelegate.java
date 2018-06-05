@@ -9,9 +9,7 @@ import com.flj.latte.delegates.LatteDelegate;
 
 import butterknife.OnClick;
 
-/**
- * Created by 傅令杰 on 2017/4/2
- */
+
 
 public class ExampleDelegate extends LatteDelegate {
 

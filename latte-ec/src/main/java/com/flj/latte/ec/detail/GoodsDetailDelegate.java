@@ -45,9 +45,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class GoodsDetailDelegate extends LatteDelegate implements
         AppBarLayout.OnOffsetChangedListener,

@@ -20,10 +20,7 @@ import com.flj.latte.util.file.FileUtil;
 
 import java.io.File;
 
-/**
- * Created by 傅令杰
- * 照片处理类
- */
+
 
 public class CameraHandler implements View.OnClickListener {
 

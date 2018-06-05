@@ -152,7 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/tv_train_date_arrow"
                     android:gravity="center"
-                    android:text="2018-3-12"
+                    android:text="1990-01-01"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="18sp" />
 
@@ -198,7 +198,7 @@
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/tv_train_time_arrow"
                     android:gravity="center"
-                    android:text="21:11"
+                    android:text="00:00"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="18sp" />
 
@@ -327,26 +327,28 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="200dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginTop="7dp"
                 android:background="@color/app_background" />
+
+            <Button
+                android:id="@+id/btn_train_create"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/holo_red_light"
+                android:gravity="center"
+                android:text="创建训练"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_train_create"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
-        android:gravity="center"
-        android:text="创建训练"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
+
 
 
 </RelativeLayout>

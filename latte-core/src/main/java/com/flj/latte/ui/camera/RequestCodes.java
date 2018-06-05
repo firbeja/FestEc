@@ -2,10 +2,7 @@ package com.flj.latte.ui.camera;
 
 import com.yalantis.ucrop.UCrop;
 
-/**
- * Created by 傅令杰
- * 请求码存储
- */
+
 
 public class RequestCodes {
     public static final int TAKE_PHOTO = 4;

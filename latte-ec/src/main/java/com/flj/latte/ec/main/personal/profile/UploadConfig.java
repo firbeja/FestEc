@@ -1,8 +1,6 @@
 package com.flj.latte.ec.main.personal.profile;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class UploadConfig {
 

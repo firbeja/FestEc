@@ -6,9 +6,7 @@
 //import me.dm7.barcodescanner.core.IViewFinder;
 //import me.dm7.barcodescanner.zbar.ZBarScannerView;
 //
-///**
-// * Created by 傅令杰
-// */
+
 //
 //public class ScanView extends ZBarScannerView {
 //

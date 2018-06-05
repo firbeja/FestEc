@@ -7,5 +7,6 @@ package com.flj.latte.ec.main.ranking;
 public enum  RankingItemFields {
     COUNT,
     USERID,
-    ENTERLIST
+    ENTERLIST,
+    TYPE
 }

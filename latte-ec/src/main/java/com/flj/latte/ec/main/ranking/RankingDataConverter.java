@@ -27,18 +27,21 @@ public class RankingDataConverter extends DataConverter {
         final MultipleItemEntity enterEntity = MultipleItemEntity.builder()
                 .setItemType(RankingItemType.Ranking)
                 .setField(RankingItemFields.ENTERLIST,enter)
+                .setField(RankingItemFields.TYPE,"报名排行")
                 .build();
 
         JSONArray leave = (JSONArray) map.get("leave");
         final MultipleItemEntity leaveEntity = MultipleItemEntity.builder()
                 .setItemType(RankingItemType.Ranking)
                 .setField(RankingItemFields.ENTERLIST,leave)
+                .setField(RankingItemFields.TYPE,"请假排行")
                 .build();
 
         JSONArray pending = (JSONArray) map.get("pending");
         final MultipleItemEntity pendingEntity = MultipleItemEntity.builder()
                 .setItemType(RankingItemType.Ranking)
                 .setField(RankingItemFields.ENTERLIST,pending)
+                .setField(RankingItemFields.TYPE,"待定排行")
                 .build();
 
         ENTITIES.add(enterEntity);

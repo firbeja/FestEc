@@ -23,9 +23,7 @@ import java.util.Map;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.ISupportFragment;
 
-/**
- * Created by 傅令杰
- */
+
 
 public abstract class BaseBottomDelegate extends LatteDelegate implements View.OnClickListener {
 

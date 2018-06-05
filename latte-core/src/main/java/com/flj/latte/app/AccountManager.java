@@ -4,9 +4,7 @@ import com.flj.latte.util.log.LatteLogger;
 
 import cn.bmob.v3.BmobUser;
 
-/**
- * Created by 傅令杰 on 2017/4/22
- */
+
 
 public class AccountManager {
 

@@ -35,7 +35,7 @@ import cn.bmob.v3.listener.SaveListener;
  */
 
 public class ActivityDelegate extends BottomItemDelegate {
-    private String[] mCategory = new String[]{"聚餐", "K歌", "打牌","足疗按摩","周边游","其他活动"};
+    private String[] mCategory = new String[]{"观看球赛", "出外交流学习"};
     private String[] mDuration = new String[]{"0.5小时", "1.0小时", "1.5小时", "2.0小时", "2.5小时", "3.0小时", "3.5小时", "4.0小时", "4.5小时", "5.0小时"};
 
     @BindView(R2.id.tv_train_category)

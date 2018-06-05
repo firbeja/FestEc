@@ -13,16 +13,13 @@ import com.flj.latte.delegates.LatteDelegate;
 import com.flj.latte.ec.main.personal.list.ListAdapter;
 import com.flj.latte.ec.main.personal.list.ListBean;
 import com.flj.latte.ec.main.personal.list.ListItemType;
-import com.flj.latte.ec.main.personal.settings.NameDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by 傅令杰
- */
+
 
 public class UserProfileDelegate extends LatteDelegate {
 
@@ -46,7 +43,6 @@ public class UserProfileDelegate extends LatteDelegate {
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
                 .setText("姓名")
-                .setDelegate(new NameDelegate())
                 .setValue("未设置姓名")
                 .build();
 

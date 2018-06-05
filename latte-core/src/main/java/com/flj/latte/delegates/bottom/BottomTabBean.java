@@ -1,8 +1,6 @@
 package com.flj.latte.delegates.bottom;
 
-/**
- * Created by 傅令杰
- */
+
 
 public final class BottomTabBean {
 
